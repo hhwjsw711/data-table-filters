@@ -9,7 +9,7 @@ export default function MDXLayout({ children }: { children: React.ReactNode }) {
     <main className="container mx-auto px-4 py-8">
       <Button asChild variant="link" className="-ml-4">
         <Link href="/">
-          <ChevronLeft className="mr-2 h-4 w-4" /> Back
+          <ChevronLeft className="mr-2 h-4 w-4" /> 返回
         </Link>
       </Button>
       <Separator className="my-6" />

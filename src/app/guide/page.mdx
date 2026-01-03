@@ -1,385 +1,250 @@
-## 使用指南（编写中）
+## 系统使用手册
 
 <span className="text-muted-foreground font-medium">更新日期：{new Date().toLocaleDateString("zh-CN", { month: "long", day: "numeric", year: "numeric" })}</span>
 
-本指南将帮助您快速上手数据表格，并指导您定义列、过滤器、搜索参数、详情面板字段等配置。
+本手册将帮助您快速掌握实时网络监控平台的使用方法。
 
-> 如有任何疑问或功能需求，请在[GitHub](https://github.com/openstatusHQ/data-table-filters/issues)上提交问题。本指南仍在编写中，我们期待您的反馈。
+> 如有任何疑问或需要技术支持，请联系开发人员胡洪伟，电话：19905880291
 
-请注意，本项目使用shadcn/ui组件库。部分自定义修改目前存放在`src/components/custom/*`目录下，未来将逐步迁移回shadcn/ui以保持完全兼容。
+---
 
-无限滚动数据表格主要由以下部分组成：
-- `DataTableFilterControls`：左侧边栏控制面板
-- `DataTableFilterCommand`：命令输入框(cmdk)
-- `DataTableInfinite`：无限滚动数据表格
-- `DataTableDetailsSheet`：详情面板
-- `TimelineChart`：时间线图表
+## 系统概述
 
-您可以完全控制数据表格及其渲染的组件。可根据需要自由扩展、修改或移除组件。
+本系统用于查看和分析网络请求监控数据，帮助您快速定位和排查网络访问问题。系统会实时记录所有网络请求的状态、响应时间、访问地区等关键信息。
 
-## 数据表格
+---
 
-### 表格列定义
+## 界面介绍
 
-`columns.tsx`文件是列定义的权威数据源。如果您熟悉shadcn，应该会感到得心应手。详细信息请查看shadcn/ui[文档](https://ui.shadcn.com/docs/components/data-table)。
+### 主要区域
 
-#### 扩展Tanstack Table类型
+1. **顶部图表区域**：以柱状图形式展示一段时间内的请求分布情况，绿色表示成功，黄色表示警告，红色表示错误
 
-我们主要通过扩展元数据类型来实现_样式定义_和_过滤函数_功能。这样可以避免直接修改数据表格组件本身。
+2. **左侧筛选栏**：提供多种筛选条件，帮助您快速找到需要的数据
 
-```tsx
-import "@tanstack/react-table";
+3. **中央数据表格**：显示所有监控记录的列表
 
-declare module "@tanstack/react-table" {
-  interface TableMeta<TData extends unknown> {
-    /**
-     * Function to style the row based on values, e.g. color-coding.
-     */
-    getRowClassName?: (row: Row<TData>) => string;
-  }
+4. **右侧详情面板**：点击任意记录后，在此查看该记录的详细信息
 
-  interface ColumnMeta {
-    /**
-     * Class name to style the header cell.
-     */
-    headerClassName?: string;
-    /**
-     * Class name to style the cell.
-     */
-    cellClassName?: string;
-    /**
-     * Label for the column when neither `id` nor `header` can be used.
-     */
-    label?: string;
-  }
+---
 
-  interface FilterFns {
-    /**
-     * Filter function to filter the data based on a date range.
-     */
-    inDateRange?: FilterFn<any>;
-    /**
-     * Filter function to filter the data based on an array of values.
-     */
-    arrSome?: FilterFn<any>;
-  }
+## 基础操作
 
-  interface ColumnFiltersOptions<TData extends RowData> {
-    filterFns?: Record<string, FilterFn<TData>>;
-  }
-}
-```
+### 1. 查看数据列表
 
-### 表格行
+打开系统后，数据表格会自动显示最新的监控记录。每条记录包含以下信息：
 
-数据量越大，越需要考虑行的渲染方式，特别是在无限滚动数据表格中。
+- **级别指示器**（最左侧彩色圆点）：
+  - 🟢 绿色：请求成功
+  - 🟡 黄色：警告
+  - 🔴 红色：错误
 
-当前我们使用自定义依赖函数进行记忆化处理，以避免在数据相同时重复渲染行。
+- **日期**：请求发生的时间
 
-```tsx
-const MemoizedRow = React.memo(
-  ({ row, selected }: { row: Row<unknown>; selected: boolean }) => {
-    useQueryState("live", searchParamsParser.live);
-    return /* ... */
-  },
-  (prev, next) => prev.row.id === next.row.id && prev.selected === next.selected
-) as typeof Row;
-```
+- **状态**：HTTP状态码（200表示成功，400表示客户端错误，500表示服务器错误）
 
-仅当行的`id`或`selected`状态发生变化时才会重新渲染。通过`useQueryState`钩子，我们在`live`参数变化时强制重新渲染（调用`getRowClassName`属性为行设置不透明度）。
+- **请求方法**：GET、POST、PUT等
 
-> 在某个时点，我们需要考虑引入`@tanstack/react-virtual`库。
+- **网址**：被访问的网址
 
+- **延迟**：请求响应时间（毫秒），数值越小表示速度越快
 
+- **地区**：请求来源地区，显示为国旗图标
 
-## 过滤器
+### 2. 向下滚动查看更多
 
-当前需要在两个位置定义过滤器：
+当您滚动到页面底部时，系统会自动加载更早的记录。
 
-- `constants.tsx`文件中的`filterFields`
-- `search-params.ts`文件中的`searchParams`
+### 3. 查看记录详情
 
-主要原因是我们希望将`filterFields`作为过滤器的权威数据源。`searchParams`用于服务端数据过滤和构建搜索命令。两者保持同步。
+点击任意一条记录，右侧会弹出详情面板，显示该记录的完整信息：
+- 所有基本字段
+- 请求头信息（Headers）
+- 消息体内容（Body）
 
-> 理想情况下，应该将`filterFields`和`searchParams`合并为单一数据源，或使两种类型扩展自同一基础类型以提高类型安全性。我们希望未来能够实现这一目标。
+点击详情面板外的区域或按 `Esc` 键可关闭详情面板。
 
-### filterFields（过滤字段）
-
-`constants.tsx`文件中的`filterFields`数组定义了数据表格左侧边栏控制面板和cmdk输入项。
+---
 
-当前支持_input（输入）_、_checkbox（复选框）_、_slider（滑块）_和_timerange（时间范围）_类型。
+## 数据筛选
 
-所有类型均扩展自`Base`基础类型，该类型定义了以下属性：
+使用左侧筛选栏可以快速找到您需要的数据。
 
-```ts
-export type Base<TData> = {
-  /**
-   * The label of the filter field.
-   */
-  label: string;
-  /**
-   * The value of the filter field - same as the column `id`
-   */
-  value: keyof TData;
-  /**
-   * Defines if the accordion in the filter bar is open by default
-   */
-  defaultOpen?: boolean;
-  /**
-   * Defines if the command input is disabled for this field
-   */
-  commandDisabled?: boolean;
-};
-```
+### 时间范围筛选
 
-为支持cmdk输入，需要为所有类型定义`options`属性。
+1. 点击"时间范围"下拉框
+2. 可以选择预设时间段（如"最近24小时"、"最近7天"）
+3. 也可以点击日历图标，自定义选择起始和结束日期
 
-```ts
-export type Option = {
-  label: string;
-  value: string | boolean | number | undefined;
-};
-```
+### 级别筛选
 
-#### Input（输入类型）
+勾选您想查看的级别：
+- **success**（成功）：正常的请求
+- **warn**（警告）：需要注意的请求
+- **error**（错误）：失败的请求
 
-`input`类型无需额外定义。
+可以同时选择多个级别。
 
-在控制侧边栏中，将渲染为简单的文本输入字段。选择值后，cmdk输入框将列出所有已定义的`options`。
+### 网址搜索
 
-```ts
-export type Input = {
-  type: "input";
-  options?: Option[];
-};
-```
-
-**限制**：输入值中不能使用空格，因为空格会被cmdk输入框解释为分隔符（反之亦然）。我们已创建issue [#27](https://github.com/openstatusHQ/data-table-filters/issues/27)来解决此问题。
-
-#### Checkbox（复选框类型）
-
-`checkbox`类型将在控制侧边栏中将选项渲染为复选框列表。如果选项超过5个，列表顶部将包含搜索输入框以过滤选项。选择值后，cmdk输入框将列出所有已定义的`options`。您还可以为每个选项定义自定义渲染组件。
-
-```ts
-export type Checkbox = {
-  type: "checkbox";
-  component?: (props: Option) => JSX.Element | null;
-  options?: Option[];
-};
-```
-
-> 当前仅`checkbox`类型支持`component`属性。该属性用于渲染自定义复选框组件。
-
-#### Slider（滑块类型）
-
-`slider`类型将在控制侧边栏中渲染为滑块，并包含最小值和最大值输入字段。选择值后，cmdk输入框将列出所有已定义的`options`。
-
-```ts
-export type Slider = {
-  type: "slider";
-  min: number;
-  max: number;
-  options?: Option[];
-};
-```
-
-#### Timerange（时间范围类型）
-
-`timerange`类型将在控制侧边栏中渲染为时间范围输入字段。**cmdk输入框暂不支持时间范围输入**，请通过`commandDisabled: true`禁用时间范围过滤字段的cmdk输入。
-
-可定义`DatePreset`来预设时间范围值。这允许您轻松选择日期范围（例如：最近7天、最近30天、最近3个月、去年等）。
-
-```ts
-export type DatePreset = {
-  label: string;
-  from: Date;
-  to: Date;
-  shortcut: string;
-};
-
-export type Timerange = {
-  type: "timerange";
-  options?: Option[]; // required for TS
-  presets?: DatePreset[];
-};
-```
-
-### 搜索参数
-
-`search-params.ts`文件中的`searchParams`数组定义了用于数据表格数据过滤的搜索参数。
-
-它主要包含与`filterFields`数组相同的字段，但使用`nuqs`解析器函数定义。
-
-**务必确保`filterFields`和`searchParams`保持同步。**
-
-## 详情面板
-
-`constants.tsx`文件中的`sheetFields`数组定义了在数据表格中选择行时渲染的`Sheet`组件内部的组件。
-
-> 待实现：仅在定义了`sheetFields`时才触发选择功能。
-
-
-默认情况下，每个键值对都会使用`DataTableSheetRowAction`组件包装，该组件允许您基于选定行过滤数据表格。根据`type`类型，支持不同的过滤选项。
-
-> 应将`filterFields`和`sheetFields`使用相同的类型，避免混淆，并创建`readonly: boolean`类型以防止从详情面板中过滤该值。
-
-允许通过提供自定义组件来覆盖默认行为。
-
-加载详情面板时，如果数据尚未可用，将显示骨架屏组件。
-
-```ts
-export type SheetField<TData, TMeta = Record<string, unknown>> = {
-  /**
-   * The id of the field - same as the column `id`
-   */
-  id: keyof TData;
-  /**
-   * The label of the field
-   */
-  label: string;
-  /**
-   * The type of the field
-   */
-  type: "readonly" | "input" | "checkbox" | "slider" | "timerange";
-  /**
-   * The custom component to be rendered
-   */
-  component?: (
-    props: TData & {
-      metadata?: {
-        totalRows: number;
-        filterRows: number;
-        totalRowsFetched: number;
-      } & TMeta;
-    }
-  ) => JSX.Element | null | string;
-  /**
-   * A condition to check if the field should be shown
-   */
-  condition?: (props: TData) => boolean;
-  /**
-   * The class name of the field
-   */
-  className?: string;
-  /**
-   * The class name of the skeleton
-   */
-  skeletonClassName?: string;
-};
-```
-
-## API接口
-
-我们使用`@tanstack/react-query`及其`useInfiniteQuery`方法获取数据。
-
-为了在客户端和服务端之间共享相同的搜索选项，我们在`route.ts`文件中使用`search-params.ts`文件中的相同`searchParams`数组。根据过滤器，查询模拟数据并返回结果。
-
-您需要自行实现实际的API端点并从数据库查询数据。
-
-
-您的API必须返回以下数据：
-
-```ts
-export async function GET(req: Request) {
-    // ....
-    return Response.json({ data, meta } satisfies {
-        data: ColumnSchema[], // TODO: defined ColumnSchema
-        meta: InfiniteQueryMeta<LogsMeta>,
-        nextCursor: number | null, // timestamp of the last item in the data array
-        prevCursor: number | null, // timestamp of the first item in the data array - used for live mode
-    })
-}
-```
-
-最初我们使用`size`和`start`，通过`size*start`计算偏移量，但这种方式在实时模式下存在缺陷。现在我们使用`cursor`标记时间戳，使用`direction`确定分页方向——实时模式使用`"prev"`，加载更多使用`"next"`。如果不需要实时模式，可以忽略`prevCursor`和`fetchPreviousPage`（包括`LiveButton`组件）。
-
-为解析响应，我们使用[`superjson`](https://github.com/flightcontrolhq/superjson)序列化和反序列化数据。这在使用`Date`对象或其他不可序列化值时特别有用。
-
-`meta`对象允许返回不属于`data`数组的额外数据。可以是图表数据（如`chartData`），或用于`Sheet`组件的统计数据（如`currentPercentiles`）。
-
-```ts
-export type InfiniteQueryMeta<TMeta = Record<string, unknown>> = {
-  /**
-   * The total number of rows in the database after filtering the timerange
-   */
-  totalRowCount: number;
-  /**
-   * The number of rows in the data-table after applying the filters
-   */
-  filterRowCount: number;
-  /**
-   * The data for the timeline chart
-   */
-  chartData: BaseChartSchema[];
-  /**
-   * The facets for every filter field
-   */
-  facets: Record<string, FacetMetadataSchema>;
-  /**
-   * The custom metadata for the data-table
-   */
-  metadata?: TMeta;
-};
-
-type FacetMetadataSchema = {
-  rows: { value: any; total: number }[];
-  total: number;
-  min: number;
-  max: number;
-};
-
-// as for our example, TMeta is defined as LogsMeta
-type LogsMeta = {
-  currentPercentiles: Record<Percentile, number>;
-};
-```
-
-## 更多功能
-
-### 时间线图表
-
-时间线图表帮助您可视化随时间变化的数据。它使用shadcn组件（查看[文档](https://ui.shadcn.com/docs/components/chart)），根据您定义的数据项数量渲染柱状图。
-
-```ts
-type BaseChartSchema = {
-    timestamp: number;
-    [key: string]: number; // expects "success", "warning", "error" as keys
-}
-
-interface TimelineChartProps<TChart extends BaseChartSchema> = {
-    /**
-     * The data from `chartData` in the `meta` object
-     */
-    data: TChart[];
-    // ...
-}
-```
-
-默认情况下，数据键来自`level`字段，该字段接受"**success**"、"**warning**"、"**error**"作为值。
-
-> `TimelineChart`组件当前无法通过属性配置（特别是标签/工具提示），但未来将支持。您需要自行更新组件以适应您的需求。
-
-### 实时模式
-
-实时模式功能允许您实时查看数据。
-
-我们在搜索参数解析器中添加`live`参数（**不是**过滤字段），以每4秒触发一次新的数据获取。借助搜索参数，实时模式在页面重新加载后仍保持激活状态。
-
-
-使用`useInfiniteQuery`的`fetchPreviousPage`方法。新获取的数据将添加到数据数组的开头（与`fetchNextPage`相反，后者添加到末尾）。
-
-在演示中，我们在未来添加了一些模拟数据以展示实时模式效果。到某个时点，将无法获取更多数据。您需要刷新页面或等待缓存失效。
-
-## 调试
-
-我们使用`react-scan`进行性能调试。它会显示正在重新渲染的组件。您可以通过将`NEXT_PUBLIC_REACT_SCAN`环境变量设置为`true`来启用，开发环境下会自动启用。
-
-对于tanstack query，我们使用`ReactQueryDevtools`查看查询和变更。它在开发环境下自动显示。
-
-可以通过将`NEXT_PUBLIC_TABLE_DEBUG`环境变量设置为`true`来启用Tanstack table调试日志。
-
-```
-# .env.local
-NEXT_PUBLIC_REACT_SCAN=true
-NEXT_PUBLIC_TABLE_DEBUG=true
-```
+在"网址"输入框中输入关键词，系统会筛选出包含该关键词的记录。
+
+### 状态码筛选
+
+勾选您想查看的HTTP状态码：
+- **200**：成功
+- **400**：客户端错误
+- **500**：服务器错误
+
+系统会显示更多状态码选项，您可以根据需要选择。
+
+### 请求方法筛选
+
+勾选您想查看的请求方法（如 GET、POST、PUT、DELETE 等）。
+
+### 地区筛选
+
+勾选您想查看的请求来源地区。地区以三字母代码表示，带有对应国旗图标。
+
+### 延迟范围筛选
+
+拖动滑块调整延迟范围：
+- 左侧滑块：最小延迟时间
+- 右侧滑块：最大延迟时间
+
+例如，设置 0-1000ms 可以筛选出响应较快的请求。
+
+### 清除筛选条件
+
+- 点击每个筛选项右侧的 ✕ 图标，可清除该项筛选
+- 点击顶部的"重置"按钮，可清除所有筛选条件
+- 按键盘 `Esc` 键也可快速清除所有筛选
+
+---
+
+## 快捷键操作
+
+为了提高操作效率，系统提供了以下快捷键：
+
+<div className="not-prose my-6">
+  <table className="w-full border-collapse">
+    <thead>
+      <tr className="border-b border-border">
+        <th className="px-4 py-2 text-left font-semibold">快捷键</th>
+        <th className="px-4 py-2 text-left font-semibold">功能说明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr className="border-b border-border">
+        <td className="px-4 py-2"><strong>Ctrl + K</strong></td>
+        <td className="px-4 py-2">打开快速搜索命令框</td>
+      </tr>
+      <tr className="border-b border-border">
+        <td className="px-4 py-2"><strong>Ctrl + B</strong></td>
+        <td className="px-4 py-2">显示/隐藏左侧筛选栏</td>
+      </tr>
+      <tr className="border-b border-border">
+        <td className="px-4 py-2"><strong>Ctrl + U</strong></td>
+        <td className="px-4 py-2">重置表格列设置（恢复默认列顺序和显示状态）</td>
+      </tr>
+      <tr className="border-b border-border">
+        <td className="px-4 py-2"><strong>Esc</strong></td>
+        <td className="px-4 py-2">清除所有筛选条件</td>
+      </tr>
+      <tr className="border-b border-border">
+        <td className="px-4 py-2"><strong>Ctrl + .</strong></td>
+        <td className="px-4 py-2">重置页面焦点到起始位置</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+> 💡 提示：点击页面右下角的"快捷键"图标可随时查看快捷键列表
+
+---
+
+## 高级功能
+
+### 1. 命令搜索（Ctrl + K）
+
+按 `Ctrl + K` 打开命令搜索框，可以快速输入筛选条件，无需点击左侧筛选栏。
+
+**使用方法：**
+1. 按 `Ctrl + K` 打开命令框
+2. 输入筛选字段名称（如"级别"、"状态码"）
+3. 选择具体的筛选值
+4. 系统会自动应用筛选
+
+### 2. 时间线图表
+
+顶部的柱状图可以帮助您快速了解一段时间内的请求分布：
+- 图表会根据您选择的时间范围自动调整
+- 点击图表中的某个时间点，可以快速筛选该时间段的数据
+- 不同颜色代表不同的请求级别
+
+### 3. 刷新数据
+
+点击工具栏中的刷新按钮（🔄图标）可以获取最新的监控数据。
+
+### 4. 主题切换
+
+点击底部的主题切换按钮可以在深色模式和浅色模式之间切换，选择您喜欢的视觉效果。
+
+---
+
+## 常见问题
+
+### Q: 为什么我看不到最新的数据？
+**A:** 点击刷新按钮（🔄）或按 `F5` 键刷新页面即可获取最新数据。
+
+### Q: 如何一次查看多个地区的数据？
+**A:** 在"地区"筛选中同时勾选多个地区即可。所有勾选的地区数据都会显示在列表中。
+
+### Q: 延迟时间是什么意思？
+**A:** 延迟时间表示从发送请求到收到响应所花费的时间（毫秒）。延迟越低，访问速度越快。一般来说：
+- 0-500ms：非常快
+- 500-1000ms：较快
+- 1000-3000ms：一般
+- 3000ms以上：较慢
+
+### Q: 状态码的含义是什么？
+**A:** 常见状态码说明：
+- **200**：请求成功
+- **301/302**：页面重定向
+- **400**：请求参数错误
+- **401**：未授权访问
+- **403**：禁止访问
+- **404**：页面不存在
+- **500**：服务器内部错误
+- **502/503**：服务器暂时不可用
+
+### Q: 如何导出数据？
+**A:** 目前系统暂不支持数据导出功能。如有需要，请联系技术支持。
+
+### Q: 左侧筛选栏不见了怎么办？
+**A:** 按 `Ctrl + B` 快捷键即可重新显示左侧筛选栏。
+
+### Q: 如何查看某个特定时间的所有错误请求？
+**A:**
+1. 使用"时间范围"筛选选择目标时间段
+2. 在"级别"筛选中只勾选"error"
+3. 数据表格会显示该时间段内的所有错误请求
+
+---
+
+## 技术支持
+
+如遇到使用问题或需要帮助，请联系：
+
+**开发人员**：胡洪伟
+**联系电话**：19905880291
+
+---
+
+## 附录：术语解释
+
+- **HTTP状态码**：服务器返回的三位数字代码，表示请求的处理结果
+- **延迟**：网络请求的响应时间，单位为毫秒（ms）
+- **请求方法**：HTTP协议中定义的操作类型，如GET（获取）、POST（提交）等
+- **地区代码**：三字母国家/地区代码，如HKG（香港）、SIN（新加坡）等
+- **时间戳**：记录事件发生的精确时间

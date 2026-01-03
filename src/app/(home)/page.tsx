@@ -1,448 +1,108 @@
-import { Link } from "@/components/custom/link";
-import { SocialsFooter } from "@/components/layout/socials-footer";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
-import { ArrowRight, ChevronRight } from "lucide-react";
-import Image from "next/image";
-import { default as NextLink } from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ModeToggle } from "@/components/theme/toggle-mode";
+import { ArrowRight, Database, Phone, User } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="container mx-auto flex min-h-screen w-full flex-col gap-8 p-4 sm:p-8 xl:gap-12 xl:p-12">
-      <div className="px-2.5">
-        <Hero />
-      </div>
-      <div className="border-b border-dashed border-border" />
-      <div className="grid gap-8 xl:grid-cols-2 xl:gap-12">
-        <NextLink href="/default" className="group flex flex-col gap-2.5">
-          <div className="flex flex-col justify-center rounded-lg border border-border/70 bg-muted/40 px-5 py-6 group-hover:border-border group-hover:bg-muted/50 md:px-10 md:py-12 xl:aspect-video">
-            <div className="flex w-full flex-col gap-2.5 transition-all duration-300 group-hover:scale-[1.02]">
-              <div className="flex flex-1 flex-row items-end gap-2.5">
-                <div className="-my-2 hidden sm:block">
-                  <Controls className="w-24" />
-                </div>
-                <div className="flex flex-1 flex-col gap-2">
-                  <CommandInput />
-                  <Toolbar />
-                  <DefaultTable />
-                  <Pagination />
-                </div>
+    <div className="flex min-h-screen flex-col">
+      {/* 主要内容区域 */}
+      <main className="flex flex-1 items-center justify-center p-6">
+        <div className="w-full max-w-3xl space-y-10">
+          {/* 系统标题 */}
+          <div className="text-center space-y-6">
+            <div className="flex justify-center">
+              <div className="rounded-full bg-primary/10 p-6">
+                <Database className="h-16 w-16 text-primary" />
               </div>
             </div>
-          </div>
-          <div className="px-2.5 py-2">
-            <p className="font-medium group-hover:underline">
-              Default Data-Table
-            </p>
-            <p className="text-sm text-muted-foreground">
-              A{" "}
-              <span className="underline decoration-yellow-500 decoration-wavy underline-offset-2">
-                simple
-              </span>{" "}
-              data-table with a{" "}
-              <span className="font-medium text-foreground">client-side</span>{" "}
-              filter and pagination.
+            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+              实时网络监控平台
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              实时监控网络请求状态，快速定位和排查网络访问问题
             </p>
           </div>
-        </NextLink>
-        <div className="relative">
-          <GuideBadgeLink className="absolute -top-3 right-3" />
-          <NextLink href="/infinite" className="group flex flex-col gap-2.5">
-            <div className="flex flex-col justify-center rounded-lg border border-border/70 bg-muted/40 px-5 py-6 group-hover:border-border group-hover:bg-muted/50 md:px-10 md:py-12 xl:aspect-video">
-              <div className="flex w-full flex-row items-end gap-2.5 transition-all duration-300 group-hover:scale-[1.02] sm:divide-x">
-                <div className="hidden sm:block">
-                  <Controls className="w-24 border-b border-transparent" />
-                </div>
-                <div className="flex flex-1 flex-col gap-2">
-                  <div className="flex flex-col gap-2 px-2.5">
-                    <CommandInput />
-                    <Timeline />
-                    <Toolbar />
+
+          {/* 进入系统按钮 */}
+          <div className="flex justify-center pt-4">
+            <Button asChild size="lg" className="text-lg px-12 py-6">
+              <Link href="/light">
+                进入系统
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </div>
+
+          {/* 系统信息和公告 */}
+          <div className="grid gap-6 pt-6">
+            {/* 联系信息 */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">联系信息</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="flex items-center gap-3">
+                    <div className="rounded-full bg-primary/10 p-2">
+                      <User className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground">开发人员</p>
+                      <p className="font-medium">胡洪伟</p>
+                    </div>
                   </div>
-                  <GridTable className="border-l-1 md:border-l-0" />
+                  <div className="flex items-center gap-3">
+                    <div className="rounded-full bg-primary/10 p-2">
+                      <Phone className="h-4 w-4 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-muted-foreground">联系电话</p>
+                      <p className="font-medium">19905880291</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="px-2.5 py-2">
-              <p className="font-medium group-hover:underline">
-                Infinite Data-Table
-              </p>
-              <p className="text-sm text-muted-foreground">
-                A{" "}
-                <span className="underline decoration-blue-500 decoration-wavy underline-offset-2">
-                  cooked
-                </span>{" "}
-                infinite scroll data-table with a{" "}
-                <span className="font-medium text-foreground">server-side</span>{" "}
-                filter, row selection and live mode.
-              </p>
-            </div>
-          </NextLink>
+              </CardContent>
+            </Card>
+
+            {/* 系统公告 */}
+            <Card className="border-dashed">
+              <CardHeader>
+                <CardTitle className="text-base">系统公告</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary">•</span>
+                    <span>系统正常运行中</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary">•</span>
+                    <span>
+                      如需帮助，请点击系统内的
+                      <Link href="/guide" className="mx-1 underline underline-offset-2 hover:text-foreground">
+                        使用手册
+                      </Link>
+                      查看详细说明
+                    </span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
         </div>
-      </div>
-      <div className="px-2.5 py-2">
-        <div className="grid gap-8 xl:grid-cols-2 xl:gap-12">
-          <Changelog />
-          <Examples />
+      </main>
+
+      {/* 底部信息 */}
+      <footer className="border-t border-border">
+        <div className="container mx-auto flex items-center justify-between px-6 py-4">
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} 实时网络监控平台
+          </p>
+          <ModeToggle />
         </div>
-      </div>
-      <div className="border-b border-dashed border-border" />
-      <SocialsFooter />
+      </footer>
     </div>
-  );
-}
-
-function DefaultTable() {
-  return (
-    <div className="divide-y overflow-hidden rounded-lg border border-border">
-      <div className="flex gap-2 px-2.5 py-2 hover:bg-muted [&>*:last-child]:bg-foreground/60 [&>*:not(:last-child):nth-child(even)]:bg-foreground/70 [&>*:not(:last-child):nth-child(odd)]:bg-muted-foreground/30">
-        <div className="size-2.5 rounded-sm" />
-        <div className="h-2.5 w-12 rounded-sm" />
-        <div className="h-2.5 w-12 rounded-sm sm:w-24" />
-        <div className="h-2.5 w-16 rounded-sm" />
-      </div>
-      <div className="flex gap-2 px-2.5 py-2 hover:bg-muted [&>*:last-child]:bg-foreground/60 [&>*:not(:last-child):nth-child(even)]:bg-foreground/70 [&>*:not(:last-child):nth-child(odd)]:bg-muted-foreground/30">
-        <div className="size-2.5 rounded-sm" />
-        <div className="h-2.5 w-16 rounded-sm" />
-        <div className="h-2.5 w-12 rounded-sm sm:w-24" />
-        <div className="h-2.5 w-16 rounded-sm" />
-      </div>
-      <div className="flex gap-2 px-2.5 py-2 hover:bg-muted [&>*:last-child]:bg-foreground/60 [&>*:not(:last-child):nth-child(even)]:bg-foreground/70 [&>*:not(:last-child):nth-child(odd)]:bg-muted-foreground/30">
-        <div className="size-2.5 rounded-sm" />
-        <div className="h-2.5 w-12 rounded-sm" />
-        <div className="h-2.5 w-12 rounded-sm sm:w-24" />
-        <div className="h-2.5 w-16 rounded-sm" />
-      </div>
-      <div className="flex gap-2 px-2.5 py-2 hover:bg-muted [&>*:last-child]:bg-foreground/60 [&>*:not(:last-child):nth-child(even)]:bg-foreground/70 [&>*:not(:last-child):nth-child(odd)]:bg-muted-foreground/30">
-        <div className="size-2.5 rounded-sm" />
-        <div className="h-2.5 w-16 rounded-sm" />
-        <div className="h-2.5 w-12 rounded-sm sm:w-24" />
-        <div className="h-2.5 w-16 rounded-sm" />
-      </div>
-    </div>
-  );
-}
-
-function GridTable({ className }: { className?: string }) {
-  return (
-    <div
-      className={cn(
-        "divide-y overflow-hidden border border-l-0 border-border",
-        className,
-      )}
-    >
-      <div className="grid grid-cols-6 divide-x hover:bg-muted [&>*:last-child>div]:ml-auto [&>*:nth-child(even)>div]:bg-foreground/70 [&>*:nth-child(odd)>div]:bg-muted-foreground/30">
-        <div className="px-2.5 py-2">
-          <div className="size-2.5 rounded-sm" />
-        </div>
-        <div className="px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm sm:w-10" />
-        </div>
-        <div className="px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm" />
-        </div>
-        <div className="col-span-2 px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm sm:w-20" />
-        </div>
-        <div className="px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm sm:w-8" />
-        </div>
-      </div>
-      <div className="grid grid-cols-6 divide-x hover:bg-muted [&>*:last-child>div]:ml-auto [&>*:nth-child(even)>div]:bg-foreground/70 [&>*:nth-child(odd)>div]:bg-muted-foreground/30">
-        <div className="px-2.5 py-2">
-          <div className="size-2.5 rounded-sm" />
-        </div>
-        <div className="px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm sm:w-10" />
-        </div>
-        <div className="px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm" />
-        </div>
-        <div className="col-span-2 px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm sm:w-20" />
-        </div>
-        <div className="px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm sm:w-8" />
-        </div>
-      </div>
-      <div className="grid grid-cols-6 divide-x hover:bg-muted [&>*:last-child>div]:ml-auto [&>*:nth-child(even)>div]:bg-foreground/70 [&>*:nth-child(odd)>div]:bg-muted-foreground/30">
-        <div className="px-2.5 py-2">
-          <div className="size-2.5 rounded-sm" />
-        </div>
-        <div className="px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm sm:w-10" />
-        </div>
-        <div className="px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm" />
-        </div>
-        <div className="col-span-2 px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm sm:w-20" />
-        </div>
-        <div className="px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm sm:w-8" />
-        </div>
-      </div>
-      <div className="grid grid-cols-6 divide-x hover:bg-muted [&>*:last-child>div]:ml-auto [&>*:nth-child(even)>div]:bg-foreground/70 [&>*:nth-child(odd)>div]:bg-muted-foreground/30">
-        <div className="px-2.5 py-2">
-          <div className="size-2.5 rounded-sm" />
-        </div>
-        <div className="px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm sm:w-10" />
-        </div>
-        <div className="px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm" />
-        </div>
-        <div className="col-span-2 px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm sm:w-20" />
-        </div>
-        <div className="px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm sm:w-8" />
-        </div>
-      </div>
-      <div className="grid grid-cols-6 divide-x hover:bg-muted [&>*:last-child>div]:ml-auto [&>*:nth-child(even)>div]:bg-foreground/70 [&>*:nth-child(odd)>div]:bg-muted-foreground/30">
-        <div className="px-2.5 py-2">
-          <div className="size-2.5 rounded-sm" />
-        </div>
-        <div className="px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm sm:w-10" />
-        </div>
-        <div className="px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm" />
-        </div>
-        <div className="col-span-2 px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm sm:w-20" />
-        </div>
-        <div className="px-2.5 py-2">
-          <div className="h-2.5 w-full rounded-sm sm:w-8" />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function CommandInput() {
-  return (
-    <div className="flex justify-between rounded-lg border border-border px-2.5 py-2 hover:bg-muted">
-      <div className="flex gap-2.5">
-        <div className="h-2.5 w-12 rounded-sm bg-foreground/70" />
-        <div className="h-2.5 w-8 rounded-sm bg-foreground/70" />
-      </div>
-      <div className="h-2.5 w-4 rounded-sm bg-muted-foreground/40" />
-    </div>
-  );
-}
-
-function Toolbar() {
-  return (
-    <div className="flex justify-between gap-2.5">
-      <div className="h-2.5 w-8 rounded-sm bg-muted-foreground/40" />
-      <div className="h-2.5 w-2.5 rounded-sm bg-muted-foreground/40" />
-    </div>
-  );
-}
-
-const BARS = 50;
-function Timeline() {
-  return (
-    <div className="flex items-end gap-px">
-      {Array.from({ length: BARS }).map((_, i) => {
-        const height = ["h-2.5", "h-2", "h-1.5", "h-1"][
-          Math.floor(Math.random() * 4)
-        ];
-        return (
-          <div
-            key={i}
-            className={cn(
-              "flex-1 rounded-sm bg-muted-foreground/20 hover:bg-muted-foreground/30",
-              height,
-            )}
-          />
-        );
-      })}
-    </div>
-  );
-}
-
-function Controls({ className }: { className?: string }) {
-  return (
-    <div className={cn("divide-y divide-transparent", className)}>
-      <div className="flex flex-col gap-2 py-2">
-        <div className="flex justify-between gap-2.5">
-          <div className="h-2.5 w-10 rounded-sm bg-foreground/50" />
-          <div className="size-2.5 rounded-sm bg-foreground/50" />
-        </div>
-        <div className="h-2.5 w-full rounded-sm bg-foreground/70" />
-      </div>
-      <div className="group/controls flex justify-between gap-2.5 py-2">
-        <div className="h-2.5 w-10 rounded-sm bg-muted-foreground/30 group-hover/controls:bg-muted-foreground/50" />
-        <div className="size-2.5 rounded-sm bg-muted-foreground/30 group-hover/controls:bg-muted-foreground/50" />
-      </div>
-      <div className="group/controls flex justify-between gap-2.5 py-2">
-        <div className="h-2.5 w-10 rounded-sm bg-muted-foreground/30 group-hover/controls:bg-muted-foreground/50" />
-        <div className="size-2.5 rounded-sm bg-muted-foreground/30 group-hover/controls:bg-muted-foreground/50" />
-      </div>
-      <div className="group/controls flex justify-between gap-2.5 py-2">
-        <div className="h-2.5 w-10 rounded-sm bg-muted-foreground/30 group-hover/controls:bg-muted-foreground/50" />
-        <div className="size-2.5 rounded-sm bg-muted-foreground/30 group-hover/controls:bg-muted-foreground/50" />
-      </div>
-      <div className="group/controls flex justify-between gap-2.5 py-2">
-        <div className="h-2.5 w-10 rounded-sm bg-muted-foreground/30 group-hover/controls:bg-muted-foreground/50" />
-        <div className="size-2.5 rounded-sm bg-muted-foreground/30 group-hover/controls:bg-muted-foreground/50" />
-      </div>
-      <div className="group/controls flex justify-between gap-2.5 py-2">
-        <div className="h-2.5 w-10 rounded-sm bg-muted-foreground/30 group-hover/controls:bg-muted-foreground/50" />
-        <div className="size-2.5 rounded-sm bg-muted-foreground/30 group-hover/controls:bg-muted-foreground/50" />
-      </div>
-      <div className="group/controls flex justify-between gap-2.5 py-2">
-        <div className="h-2.5 w-10 rounded-sm bg-muted-foreground/30 group-hover/controls:bg-muted-foreground/50" />
-        <div className="size-2.5 rounded-sm bg-muted-foreground/30 group-hover/controls:bg-muted-foreground/50" />
-      </div>
-    </div>
-  );
-}
-
-function Pagination() {
-  return (
-    <div className="flex justify-end gap-2.5">
-      <div className="h-2.5 w-8 rounded-sm bg-muted-foreground/30" />
-      <div className="size-2.5 rounded-sm bg-foreground/50" />
-      <div className="size-2.5 rounded-sm bg-foreground/50" />
-      <div className="size-2.5 rounded-sm bg-foreground/70" />
-      <div className="size-2.5 rounded-sm bg-foreground/70" />
-    </div>
-  );
-}
-
-function Hero() {
-  return (
-    <div className="flex flex-col-reverse items-start justify-between gap-8 sm:flex-row">
-      <div className="max-w-4xl">
-        <h1 className="mb-4 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
-          强大的React<span className="text-nowrap">数据表格</span>组件
-        </h1>
-        {/* REMINDER: text-balance produces layout shifts on iOS here - maybe due to arrow svg? */}
-        <p className="max-w-[650px] text-lg text-muted-foreground">
-          基于{" "}
-          <Link href="https://tanstack.com/table" className="text-nowrap">
-            tanstack table
-          </Link>
-          、{" "}
-          <Link href="https://ui.shadcn.com" className="text-nowrap">
-            shadcn/ui
-          </Link>{" "}
-          和 <Link href="https://nuqs.47ng.com">nuqs</Link> 实现的可扩展、快速、易用的过滤数据表格。在{" "}
-          <Link href="https://github.com/openstatusHQ/data-table-filters">
-            GitHub
-          </Link>
-          {" "}上开源。
-        </p>
-      </div>
-      <NextLink
-        href="https://openstatus.dev"
-        target="_blank"
-        className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-dashed border-border bg-white sm:h-12 sm:w-12"
-      >
-        <Image
-          src="/logos/OpenStatus.png"
-          alt="OpenStatus Logo"
-          className="aspect-square object-cover p-1"
-          fill
-        />
-      </NextLink>
-    </div>
-  );
-}
-
-const changelog: {
-  date: Date;
-  description: React.ReactNode;
-}[] = [
-  {
-    date: new Date("03-30-2025"),
-    description: (
-      <>
-        Blog post about vercel-edge-ping UI:{" "}
-        <Link href="https://www.openstatus.dev/blog/openstatus-light-viewer">
-          OpenStatus Light Viewer
-        </Link>
-      </>
-    ),
-  },
-  {
-    date: new Date("03-16-2025"),
-    description: (
-      <>
-        Blog post about tanstack infinite query usage:{" "}
-        <Link href="https://www.openstatus.dev/blog/live-mode-infinite-query">
-          Live Mode
-        </Link>
-      </>
-    ),
-  },
-  {
-    date: new Date("02-02-2025"),
-    description: (
-      <>
-        Blog post about features and caveats:{" "}
-        <Link href="http://openstatus.dev/blog/data-table-redesign">
-          The React data-table I always wanted
-        </Link>
-      </>
-    ),
-  },
-];
-
-function Changelog() {
-  return (
-    <div className="grid gap-2">
-      <p className="font-medium">更新日志</p>
-      <ul className="grid gap-2">
-        {changelog.map((item, i) => {
-          return (
-            <li key={i} className="flex flex-col gap-0.5">
-              <time className="font-mono text-sm text-muted-foreground">
-                {item.date.toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })}
-              </time>
-              <p className="text-foreground/80">{item.description}</p>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-}
-
-function Examples() {
-  return (
-    <div className="flex flex-col gap-2">
-      <p className="font-medium">更多示例</p>
-      <ul
-        role="list"
-        className="grid list-inside list-disc gap-2 marker:text-muted-foreground"
-      >
-        <li>
-          <Link href="/light">OpenStatus Light Viewer</Link>
-        </li>
-      </ul>
-    </div>
-  );
-}
-
-function GuideBadgeLink({ className }: { className?: string }) {
-  return (
-    <NextLink href="/guide" className={cn("group", className)}>
-      <Badge
-        variant="outline"
-        className="border-dashed border-border bg-background pr-1.5"
-      >
-        指南{" "}
-        <ArrowRight className="relative mb-[1px] inline h-3 w-0 transition-all group-hover:w-3" />
-        <ChevronRight className="relative mb-[1px] inline h-3 w-3 transition-all group-hover:w-0" />
-      </Badge>
-    </NextLink>
   );
 }

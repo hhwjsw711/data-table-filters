@@ -65,8 +65,7 @@ export function DataTableToolbar({ renderActions }: DataTableToolbarProps) {
               <p>
                 切换控制面板{" "}
                 <Kbd className="ml-1 text-muted-foreground group-hover:text-accent-foreground">
-                  <span className="mr-1">⌘</span>
-                  <span>B</span>
+                  <span>Ctrl+B</span>
                 </Kbd>
               </p>
             </TooltipContent>

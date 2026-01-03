@@ -147,8 +147,7 @@ export function DataTableFilterCommand({
           )}
         </span>
         <Kbd className="ml-auto text-muted-foreground group-hover:text-accent-foreground">
-          <span className="mr-1">⌘</span>
-          <span>K</span>
+          <span>Ctrl+K</span>
         </Kbd>
       </button>
       <Command
@@ -359,7 +358,7 @@ export function DataTableFilterCommand({
                   并集：<Kbd variant="outline">regions:a,b</Kbd>
                 </span>
                 <span>
-                  范围：<Kbd variant="outline">p95:59-340</Kbd>
+                  范围：<Kbd variant="outline">latency:100-500</Kbd>
                 </span>
               </div>
               {lastSearches.length ? (

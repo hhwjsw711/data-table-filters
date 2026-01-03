@@ -26,12 +26,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </Link>
       </Button>
       {children}
-      <div className="fixed bottom-4 left-4 z-50">
-        <APIPopover />
-      </div>
-      <div className="fixed bottom-4 right-4 z-50">
-        <ButtonPile />
-      </div>
     </>
   );
 }
@@ -100,8 +94,7 @@ function APIPopover() {
                 OpenStatus Light Viewer
               </h4>
               <Kbd variant="outline">
-                <span className="mr-1">⌘</span>
-                <span>J</span>
+                <span>Ctrl+J</span>
               </Kbd>
             </div>
             <p className="text-sm text-muted-foreground">
@@ -128,7 +121,7 @@ function APIPopover() {
                 type="url"
                 id="endpoint"
                 name="endpoint"
-                placeholder="https://light.openstatus.dev"
+                placeholder="https://vercel-edge-ping-eta.vercel.app"
                 pattern="https://.*"
                 value={endpoint}
                 onChange={(e) => setEndpoint(e.target.value)}

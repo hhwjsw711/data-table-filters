@@ -17,7 +17,7 @@ type _TemporalFacetsType = {
 };
 
 const PAGE_SIZE = 100;
-const VERCEL_EDGE_PING_URL = "https://light.openstatus.dev";
+const VERCEL_EDGE_PING_URL = "https://vercel-edge-ping-eta.vercel.app";
 
 export async function GET(req: NextRequest) {
   const cookieList = req.cookies.getAll();

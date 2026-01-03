@@ -53,7 +53,7 @@ It’s a lightweight, community edition of OpenStatus with the following basic f
 
 #### Do I need to self-host the [data-table-filters](https://github.com/openstatusHQ/data-table-filters) project?
 
-No, self-hosting is not required. If you have `vercel-edge-ping` ingesting data into Tinybird and are using the default pipes, you can open the API endpoint configuration. Click the floating button in the bottom left corner or press <kbd>⌘ + J</kbd>. Enter the base URL, and the `tb_endpoint` cookie will be set automatically. Delete manually if needed.
+No, self-hosting is not required. If you have `vercel-edge-ping` ingesting data into Tinybird and are using the default pipes, you can open the API endpoint configuration. Click the floating button in the bottom left corner or press <kbd>Ctrl + J</kbd>. Enter the base URL, and the `tb_endpoint` cookie will be set automatically. Delete manually if needed.
 
 #### Is an authentication system provided?
 

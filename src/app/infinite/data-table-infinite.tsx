@@ -321,7 +321,7 @@ export function DataTableInfinite<TData, TValue, TMeta>({
         >
           <div className="border-b border-border bg-background p-2 md:sticky md:top-0">
             <div className="flex h-[46px] items-center justify-between gap-3">
-              <p className="px-2 font-medium text-foreground">过滤器</p>
+              <p className="px-2 font-medium text-foreground">实时网络监控平台</p>
               <div>
                 {table.getState().columnFilters.length ? (
                   <DataTableResetButton />
@@ -455,7 +455,7 @@ export function DataTableInfinite<TData, TValue, TMeta>({
                         colSpan={columns.length}
                         className="h-24 text-center"
                       >
-                        No results.
+                        暂无数据。
                       </TableCell>
                     </TableRow>
                   </React.Fragment>
@@ -472,19 +472,19 @@ export function DataTableInfinite<TData, TValue, TMeta>({
                         {isFetching ? (
                           <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
                         ) : null}
-                        Load More
+                        加载更多
                       </Button>
                     ) : (
                       <p className="text-sm text-muted-foreground">
-                        No more data to load (
+                        没有更多数据（已显示{" "}
                         <span className="font-mono font-medium">
                           {formatCompactNumber(filterRows)}
                         </span>{" "}
-                        of{" "}
+                        /{" "}
                         <span className="font-mono font-medium">
                           {formatCompactNumber(totalRows)}
                         </span>{" "}
-                        rows)
+                        行）
                       </p>
                     )}
                   </TableCell>

@@ -33,7 +33,6 @@ export function DataTableResetButton() {
           <p>
             重置过滤器{" "}
             <Kbd className="ml-1 text-muted-foreground group-hover:text-accent-foreground">
-              <span className="mr-1">⌘</span>
               <span>Esc</span>
             </Kbd>
           </p>
