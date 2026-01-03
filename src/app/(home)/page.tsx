@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ModeToggle } from "@/components/theme/toggle-mode";
-import { ArrowRight, Database, Phone, User } from "lucide-react";
+import { ArrowRight, RadioTower, Phone, User } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
           <div className="text-center space-y-6">
             <div className="flex justify-center">
               <div className="rounded-full bg-primary/10 p-6">
-                <Database className="h-16 w-16 text-primary" />
+                <RadioTower className="h-16 w-16 text-primary" />
               </div>
             </div>
             <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">

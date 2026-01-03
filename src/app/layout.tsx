@@ -8,12 +8,12 @@ import { Toaster } from "@/components/ui/sonner";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 
-const TITLE = "强大的React数据表格组件 | OpenStatus";
+const TITLE = "实时网络监控平台";
 const DESCRIPTION =
-  "基于tanstack table、shadcn/ui和nuqs实现的灵活、快速、易用的过滤数据表格。";
+  "面向政府单位的专业网络监控平台，实时监测网络状态、流量分析、安全预警。";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://data-table.openstatus.dev"),
+  metadataBase: new URL("https://ping.isllm.com"),
   title: TITLE,
   description: DESCRIPTION,
   twitter: {
