@@ -28,7 +28,7 @@ export function SocialsFooter() {
         <ModeToggle className="[&>svg]:h-4 [&>svg]:w-4" />
       </div>
       <p className="text-muted-foreground text-center text-sm">
-        Powered by <Link href="https://openstatus.dev">OpenStatus</Link>
+        技术支持：<Link href="https://openstatus.dev">OpenStatus</Link>
       </p>
     </div>
   );

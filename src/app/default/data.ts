@@ -3,7 +3,7 @@ import type { ColumnSchema } from "./types";
 
 export const data = [
   {
-    name: "Edge Api",
+    name: "边缘接口",
     url: "edge-api.acme.com/health",
     p95: 140,
     public: true,
@@ -13,7 +13,7 @@ export const data = [
     date: subHours(new Date(), 1),
   },
   {
-    name: "Lambda Api",
+    name: "无服务器接口",
     url: "lambda-api.acme.com/health",
     p95: 203,
     public: true,
@@ -23,7 +23,7 @@ export const data = [
     date: subHours(new Date(), 10),
   },
   {
-    name: "Storybook",
+    name: "组件库",
     url: "storybook.acme.com",
     p95: 1252,
     public: false,
@@ -33,7 +33,7 @@ export const data = [
     date: subMinutes(new Date(), 10),
   },
   {
-    name: "Marketing",
+    name: "营销站点",
     url: "acme.com",
     p95: 659,
     public: true,
@@ -43,7 +43,7 @@ export const data = [
     date: subDays(new Date(), 1),
   },
   {
-    name: "App",
+    name: "应用程序",
     url: "app.acme.com",
     p95: 1301,
     public: false,
@@ -53,7 +53,7 @@ export const data = [
     date: subHours(new Date(), 13),
   },
   {
-    name: "Demo",
+    name: "演示站点",
     url: "demo.acme.com",
     p95: 2420,
     public: true,
@@ -63,7 +63,7 @@ export const data = [
     date: subDays(new Date(), 4),
   },
   {
-    name: "Documentation",
+    name: "文档中心",
     url: "docs.acme.com",
     p95: 943,
     public: true,
@@ -73,7 +73,7 @@ export const data = [
     date: subDays(new Date(), 6),
   },
   {
-    name: "Boilerplate",
+    name: "项目模板",
     url: "boilerplate.acme.com",
     p95: undefined,
     public: true,
@@ -83,7 +83,7 @@ export const data = [
     date: subDays(new Date(), 10),
   },
   {
-    name: "Dashboard",
+    name: "控制面板",
     url: "app.acme.com/dashboard",
     p95: 967,
     public: false,
@@ -93,7 +93,7 @@ export const data = [
     date: subHours(new Date(), 28),
   },
   {
-    name: "E2E Testing",
+    name: "端到端测试",
     url: "staging-cypress-e2e.acme.com",
     p95: 1954,
     public: false,
@@ -103,7 +103,7 @@ export const data = [
     date: subDays(new Date(), 12),
   },
   {
-    name: "Web App",
+    name: "网页应用",
     url: "web-app.acme.com",
     p95: 1043,
     public: true,
@@ -113,7 +113,7 @@ export const data = [
     date: subDays(new Date(), 15),
   },
   {
-    name: "Admin Panel",
+    name: "管理后台",
     url: "admin.acme.com",
     p95: 1342,
     public: false,
@@ -123,7 +123,7 @@ export const data = [
     date: subHours(new Date(), 5),
   },
   {
-    name: "API Gateway",
+    name: "接口网关",
     url: "api-gateway.acme.com/health",
     p95: 190,
     public: true,
@@ -133,7 +133,7 @@ export const data = [
     date: subHours(new Date(), 3),
   },
   {
-    name: "Analytics Service",
+    name: "分析服务",
     url: "analytics.acme.com",
     p95: 810,
     public: true,
@@ -143,7 +143,7 @@ export const data = [
     date: subDays(new Date(), 2),
   },
   {
-    name: "Support Portal",
+    name: "支持门户",
     url: "support.acme.com",
     p95: 752,
     public: true,
@@ -153,7 +153,7 @@ export const data = [
     date: subMinutes(new Date(), 30),
   },
   {
-    name: "User Management",
+    name: "用户管理",
     url: "user-mgmt.acme.com",
     p95: 980,
     public: false,
@@ -163,7 +163,7 @@ export const data = [
     date: subDays(new Date(), 7),
   },
   {
-    name: "Payment Gateway",
+    name: "支付网关",
     url: "payments.acme.com",
     p95: 156,
     public: true,
@@ -173,7 +173,7 @@ export const data = [
     date: subHours(new Date(), 8),
   },
   {
-    name: "Notification Service",
+    name: "通知服务",
     url: "notify.acme.com",
     p95: 345,
     public: false,
@@ -183,7 +183,7 @@ export const data = [
     date: subDays(new Date(), 11),
   },
   {
-    name: "File Storage",
+    name: "文件存储",
     url: "storage.acme.com",
     p95: 1220,
     public: true,
@@ -193,7 +193,7 @@ export const data = [
     date: subDays(new Date(), 3),
   },
   {
-    name: "CDN",
+    name: "内容分发网络",
     url: "cdn.acme.com",
     p95: 89,
     public: true,
@@ -203,7 +203,7 @@ export const data = [
     date: subDays(new Date(), 2),
   },
   {
-    name: "Auth Service",
+    name: "认证服务",
     url: "auth.acme.com",
     p95: 542,
     public: false,

@@ -143,7 +143,7 @@ export function DataTableFilterCommand({
           {inputValue.trim() ? (
             <span className="text-foreground">{inputValue}</span>
           ) : (
-            <span>Search data table...</span>
+            <span>搜索数据表...</span>
           )}
         </span>
         <Kbd className="ml-auto text-muted-foreground group-hover:text-accent-foreground">
@@ -193,14 +193,14 @@ export function DataTableFilterCommand({
             const word = getWordByCaretPosition({ value, caretPosition });
             setCurrentWord(word);
           }}
-          placeholder="Search data table..."
+          placeholder="搜索数据表..."
           className="text-foreground"
         />
         <div className="relative">
           <div className="absolute top-2 z-10 w-full overflow-hidden rounded-lg border border-border bg-popover text-popover-foreground shadow-md outline-none animate-in">
             {/* default height is 300px but in case of more, we'd like to tease the user */}
             <CommandList className="max-h-[310px]">
-              <CommandGroup heading="Filter">
+              <CommandGroup heading="过滤器">
                 {filterFields.map((field) => {
                   if (typeof field.value !== "string") return null;
                   if (inputValue.includes(`${field.value}:`)) return null;
@@ -239,7 +239,7 @@ export function DataTableFilterCommand({
                 })}
               </CommandGroup>
               <CommandSeparator />
-              <CommandGroup heading="Query">
+              <CommandGroup heading="查询">
                 {filterFields?.map((field) => {
                   if (typeof field.value !== "string") return null;
                   if (!currentWord.includes(`${field.value}:`)) return null;
@@ -287,7 +287,7 @@ export function DataTableFilterCommand({
                 })}
               </CommandGroup>
               <CommandSeparator />
-              <CommandGroup heading="Suggestions">
+              <CommandGroup heading="建议">
                 {lastSearches
                   ?.sort((a, b) => b.timestamp - a.timestamp)
                   .slice(0, 5)
@@ -337,7 +337,7 @@ export function DataTableFilterCommand({
                     );
                   })}
               </CommandGroup>
-              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandEmpty>未找到结果。</CommandEmpty>
             </CommandList>
             <div
               className="flex flex-wrap justify-between gap-3 border-t bg-accent/50 px-2 py-1.5 text-sm text-accent-foreground"
@@ -345,21 +345,21 @@ export function DataTableFilterCommand({
             >
               <div className="flex flex-wrap gap-3">
                 <span>
-                  Use <Kbd variant="outline">↑</Kbd>{" "}
-                  <Kbd variant="outline">↓</Kbd> to navigate
+                  使用 <Kbd variant="outline">↑</Kbd>{" "}
+                  <Kbd variant="outline">↓</Kbd> 导航
                 </span>
                 <span>
-                  <Kbd variant="outline">Enter</Kbd> to query
+                  <Kbd variant="outline">Enter</Kbd> 查询
                 </span>
                 <span>
-                  <Kbd variant="outline">Esc</Kbd> to close
+                  <Kbd variant="outline">Esc</Kbd> 关闭
                 </span>
                 <Separator orientation="vertical" className="my-auto h-3" />
                 <span>
-                  Union: <Kbd variant="outline">regions:a,b</Kbd>
+                  并集：<Kbd variant="outline">regions:a,b</Kbd>
                 </span>
                 <span>
-                  Range: <Kbd variant="outline">p95:59-340</Kbd>
+                  范围：<Kbd variant="outline">p95:59-340</Kbd>
                 </span>
               </div>
               {lastSearches.length ? (

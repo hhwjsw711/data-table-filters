@@ -21,14 +21,14 @@ import type { ColumnType } from "./columns";
 
 export const filterFields = [
   {
-    label: "Time Range",
+    label: "时间范围",
     value: "timestamp",
     type: "timerange",
     defaultOpen: true,
     commandDisabled: true,
   },
   {
-    label: "Level",
+    label: "级别",
     value: "level",
     type: "checkbox",
     defaultOpen: true,
@@ -48,12 +48,12 @@ export const filterFields = [
     ),
   },
   {
-    label: "URL",
+    label: "网址",
     value: "url",
     type: "input",
   },
   {
-    label: "Status Code",
+    label: "状态码",
     value: "status",
     type: "checkbox",
     // REMINDER: will be injected by the client.tsx
@@ -67,14 +67,14 @@ export const filterFields = [
     ),
   },
   {
-    label: "Method",
+    label: "请求方法",
     value: "method",
     type: "checkbox",
     // REMINDER: will be injected by the client.tsx
     options: METHODS.map((region) => ({ label: region, value: region })),
   },
   {
-    label: "Region",
+    label: "地区",
     value: "region",
     type: "checkbox",
     options: VERCEL_EDGE_REGIONS.map((region) => ({
@@ -83,7 +83,7 @@ export const filterFields = [
     })),
   },
   {
-    label: "Latency",
+    label: "延迟",
     value: "latency",
     type: "slider",
     min: 0,
@@ -96,7 +96,7 @@ export const filterFields = [
 export const sheetFields = [
   {
     id: "level",
-    label: "Level",
+    label: "级别",
     type: "checkbox",
     component: (props) => (
       <div className="flex items-center justify-end gap-1.5">
@@ -108,7 +108,7 @@ export const sheetFields = [
   },
   {
     id: "timestamp",
-    label: "Timestamp",
+    label: "时间戳",
     type: "timerange",
     component: (props) =>
       format(new Date(props.timestamp), "LLL dd, y HH:mm:ss"),
@@ -116,26 +116,26 @@ export const sheetFields = [
   },
   {
     id: "status",
-    label: "Status",
+    label: "状态",
     type: "checkbox",
     component: (props) => <DataTableColumnStatusCode value={props.status} />,
     skeletonClassName: "w-12",
   },
   {
     id: "method",
-    label: "Method",
+    label: "请求方法",
     type: "checkbox",
     skeletonClassName: "w-10",
   },
   {
     id: "url",
-    label: "URL",
+    label: "网址",
     type: "input",
     skeletonClassName: "w-24",
   },
   {
     id: "region",
-    label: "Region",
+    label: "地区",
     type: "checkbox",
     component: (props) => (
       <DataTableColumnRegion value={props.region} reverse showFlag />
@@ -144,14 +144,14 @@ export const sheetFields = [
   },
   {
     id: "latency",
-    label: "Latency",
+    label: "延迟",
     type: "slider",
     component: (props) => <DataTableColumnLatency value={props.latency} />,
     skeletonClassName: "w-16",
   },
   {
     id: "headers",
-    label: "Headers",
+    label: "请求头",
     type: "readonly",
     condition: (props) => props.headers && JSON.parse(props.headers),
     component: (props) => (
@@ -162,7 +162,7 @@ export const sheetFields = [
   },
   {
     id: "body",
-    label: "Body",
+    label: "消息体",
     type: "readonly",
     condition: (props) => props.body !== undefined,
     component: (props) => (

@@ -25,7 +25,7 @@ export function DataTablePagination() {
   return (
     <div className="flex items-center justify-end space-x-4 md:space-x-6 lg:space-x-8">
       <div className="flex items-center space-x-2">
-        <p className="text-sm font-medium">Rows per page</p>
+        <p className="text-sm font-medium">每页行数</p>
         <Select
           value={`${pagination.pageSize}`}
           onValueChange={(value) => {
@@ -45,7 +45,7 @@ export function DataTablePagination() {
         </Select>
       </div>
       <div className="flex items-center justify-center text-sm font-medium">
-        Page {pagination.pageIndex + 1} of {pageCount}
+        第 {pagination.pageIndex + 1} 页，共 {pageCount} 页
       </div>
       <div className="flex items-center space-x-2">
         <Button
@@ -56,7 +56,7 @@ export function DataTablePagination() {
           }}
           disabled={!table.getCanPreviousPage()}
         >
-          <span className="sr-only">Go to first page</span>
+          <span className="sr-only">转到第一页</span>
           <ChevronsLeft className="h-4 w-4" />
         </Button>
         <Button
@@ -67,7 +67,7 @@ export function DataTablePagination() {
           }}
           disabled={!table.getCanPreviousPage()}
         >
-          <span className="sr-only">Go to previous page</span>
+          <span className="sr-only">转到上一页</span>
           <ChevronLeft className="h-4 w-4" />
         </Button>
         <Button
@@ -78,7 +78,7 @@ export function DataTablePagination() {
           }}
           disabled={!table.getCanNextPage()}
         >
-          <span className="sr-only">Go to next page</span>
+          <span className="sr-only">转到下一页</span>
           <ChevronRight className="h-4 w-4" />
         </Button>
         <Button
@@ -89,7 +89,7 @@ export function DataTablePagination() {
           }}
           disabled={!table.getCanNextPage()}
         >
-          <span className="sr-only">Go to last page</span>
+          <span className="sr-only">转到最后一页</span>
           <ChevronsRight className="h-4 w-4" />
         </Button>
       </div>

@@ -12,12 +12,12 @@ import type { ColumnSchema } from "./types";
 export const columns: ColumnDef<ColumnSchema>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: "名称",
     enableHiding: false,
   },
   {
     accessorKey: "url",
-    header: "URL",
+    header: "网址",
     cell: ({ row }) => {
       const value = row.getValue("url");
       return <div className="max-w-[200px] truncate">{`${value}`}</div>;
@@ -25,7 +25,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
   },
   {
     accessorKey: "regions",
-    header: "Regions",
+    header: "地区",
     cell: ({ row }) => {
       const value = row.getValue("regions");
       if (Array.isArray(value)) {
@@ -43,7 +43,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
   },
   {
     accessorKey: "tags",
-    header: "Tags",
+    header: "标签",
     cell: ({ row }) => {
       const value = row.getValue("tags") as string | string[];
       if (Array.isArray(value)) {
@@ -99,7 +99,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
   },
   {
     accessorKey: "active",
-    header: "Active",
+    header: "激活",
     cell: ({ row }) => {
       const value = row.getValue("active");
       if (value) return <Check className="h-4 w-4" />;
@@ -115,7 +115,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
   },
   {
     accessorKey: "public",
-    header: "Public",
+    header: "公开",
     cell: ({ row }) => {
       const value = row.getValue("public");
       if (value) return <Check className="h-4 w-4" />;
@@ -132,7 +132,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
   {
     accessorKey: "date",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Date" />
+      <DataTableColumnHeader column={column} title="日期" />
     ),
     cell: ({ row }) => {
       const value = row.getValue("date");

@@ -26,12 +26,12 @@ export function DataTableResetButton() {
             onClick={() => table.resetColumnFilters()}
           >
             <X className="mr-2 h-4 w-4" />
-            Reset
+            重置
           </Button>
         </TooltipTrigger>
         <TooltipContent side="left">
           <p>
-            Reset filters with{" "}
+            重置过滤器{" "}
             <Kbd className="ml-1 text-muted-foreground group-hover:text-accent-foreground">
               <span className="mr-1">⌘</span>
               <span>Esc</span>

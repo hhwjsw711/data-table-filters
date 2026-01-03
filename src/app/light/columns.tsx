@@ -44,7 +44,7 @@ export const columns: ColumnDef<ColumnType>[] = [
   },
   {
     accessorKey: "timestamp",
-    header: "Date",
+    header: "日期",
     cell: ({ row }) => {
       const date = new Date(row.getValue<ColumnType["timestamp"]>("timestamp"));
       return <DataTableColumnTimestamp date={date} />;
@@ -54,7 +54,7 @@ export const columns: ColumnDef<ColumnType>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: "状态",
     cell: ({ row }) => {
       const status = row.getValue<ColumnType["status"]>("status");
       return <DataTableColumnStatusCode value={status} />;
@@ -64,13 +64,13 @@ export const columns: ColumnDef<ColumnType>[] = [
   },
   {
     accessorKey: "method",
-    header: "Method",
+    header: "请求方法",
     enableResizing: false,
     filterFn: "arrIncludesSome",
   },
   {
     accessorKey: "url",
-    header: "URL",
+    header: "网址",
     enableResizing: false,
     // meta: {
     //   cellClassName: "truncate max-w-[250px]",
@@ -78,7 +78,7 @@ export const columns: ColumnDef<ColumnType>[] = [
   },
   {
     accessorKey: "latency",
-    header: "Latency",
+    header: "延迟",
     cell: ({ row }) => {
       const latency = row.getValue<ColumnType["latency"]>("latency");
       return <DataTableColumnLatency value={latency} />;
@@ -88,7 +88,7 @@ export const columns: ColumnDef<ColumnType>[] = [
   },
   {
     accessorKey: "region",
-    header: "Region",
+    header: "地区",
     cell: ({ row }) => {
       const region = row.getValue<ColumnType["region"]>("region");
       return <DataTableColumnRegion value={region} />;

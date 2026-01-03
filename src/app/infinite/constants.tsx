@@ -25,14 +25,14 @@ import { type ColumnSchema } from "./schema";
 // that way, we could have 'message' or 'headers' field with label and value as well as type!
 export const filterFields = [
   {
-    label: "Time Range",
+    label: "时间范围",
     value: "date",
     type: "timerange",
     defaultOpen: true,
     commandDisabled: true,
   },
   {
-    label: "Level",
+    label: "级别",
     value: "level",
     type: "checkbox",
     defaultOpen: true,
@@ -61,17 +61,17 @@ export const filterFields = [
     },
   },
   {
-    label: "Host",
+    label: "主机",
     value: "host",
     type: "input",
   },
   {
-    label: "Pathname",
+    label: "路径",
     value: "pathname",
     type: "input",
   },
   {
-    label: "Status Code",
+    label: "状态码",
     value: "status",
     type: "checkbox",
     options: [
@@ -92,7 +92,7 @@ export const filterFields = [
     },
   },
   {
-    label: "Method",
+    label: "请求方法",
     value: "method",
     type: "checkbox",
     options: METHODS.map((region) => ({ label: region, value: region })),
@@ -101,7 +101,7 @@ export const filterFields = [
     },
   },
   {
-    label: "Regions",
+    label: "地区",
     value: "regions",
     type: "checkbox",
     options: REGIONS.map((region) => ({ label: region, value: region })),
@@ -110,7 +110,7 @@ export const filterFields = [
     },
   },
   {
-    label: "Latency",
+    label: "延迟",
     value: "latency",
     type: "slider",
     min: 0,
@@ -124,7 +124,7 @@ export const filterFields = [
     max: 5000,
   },
   {
-    label: "Connection",
+    label: "连接",
     value: "timing.connection",
     type: "slider",
     min: 0,
@@ -145,7 +145,7 @@ export const filterFields = [
     max: 5000,
   },
   {
-    label: "Transfer",
+    label: "传输",
     value: "timing.transfer",
     type: "slider",
     min: 0,
@@ -156,20 +156,20 @@ export const filterFields = [
 export const sheetFields = [
   {
     id: "uuid",
-    label: "Request ID",
+    label: "请求ID",
     type: "readonly",
     skeletonClassName: "w-64",
   },
   {
     id: "date",
-    label: "Date",
+    label: "日期",
     type: "timerange",
     component: (props) => format(new Date(props.date), "LLL dd, y HH:mm:ss"),
     skeletonClassName: "w-36",
   },
   {
     id: "status",
-    label: "Status",
+    label: "状态",
     type: "checkbox",
     component: (props) => {
       return (
@@ -182,7 +182,7 @@ export const sheetFields = [
   },
   {
     id: "method",
-    label: "Method",
+    label: "方法",
     type: "checkbox",
     component: (props) => {
       return <span className="font-mono">{props.method}</span>;
@@ -191,19 +191,19 @@ export const sheetFields = [
   },
   {
     id: "host",
-    label: "Host",
+    label: "主机",
     type: "input",
     skeletonClassName: "w-24",
   },
   {
     id: "pathname",
-    label: "Pathname",
+    label: "路径",
     type: "input",
     skeletonClassName: "w-56",
   },
   {
     id: "regions",
-    label: "Regions",
+    label: "地区",
     type: "checkbox",
     skeletonClassName: "w-12",
     component: (props) => (
@@ -212,7 +212,7 @@ export const sheetFields = [
   },
   {
     id: "latency",
-    label: "Latency",
+    label: "延迟",
     type: "slider",
     component: (props) => (
       <>
@@ -224,7 +224,7 @@ export const sheetFields = [
   },
   {
     id: "percentile",
-    label: "Percentile",
+    label: "百分位数",
     type: "readonly",
     component: (props) => {
       return (
@@ -240,7 +240,7 @@ export const sheetFields = [
   },
   {
     id: "timing.dns", // REMINDER: cannot be 'timing' as it is a property of the object
-    label: "Timing Phases",
+    label: "时序阶段",
     type: "readonly",
     component: (props) => (
       <SheetTimingPhases latency={props.latency} timing={props} />
@@ -249,7 +249,7 @@ export const sheetFields = [
   },
   {
     id: "headers",
-    label: "Headers",
+    label: "请求头",
     type: "readonly",
     component: (props) => (
       // REMINDER: negative margin to make it look like the header is on the same level of the tab triggers
@@ -259,7 +259,7 @@ export const sheetFields = [
   },
   {
     id: "message",
-    label: "Message",
+    label: "消息",
     type: "readonly",
     condition: (props) => props.message !== undefined,
     component: (props) => (

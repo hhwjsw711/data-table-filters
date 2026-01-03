@@ -28,7 +28,7 @@ export function useCopyToClipboard() {
         }
 
         if (withToast) {
-          toast.success("Copied to clipboard");
+          toast.success("已复制到剪贴板");
         }
 
         return true;

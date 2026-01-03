@@ -81,7 +81,7 @@ export function DatePickerWithRange({
                 format(date.from, "LLL dd, y")
               )
             ) : (
-              <span>Pick a date</span>
+              <span>选择日期</span>
             )}
           </Button>
         </PopoverTrigger>
@@ -130,7 +130,7 @@ function DatePresets({
 }) {
   return (
     <div className="flex flex-col gap-2 p-3">
-      <p className="mx-3 text-xs uppercase text-muted-foreground">Date Range</p>
+      <p className="mx-3 text-xs uppercase text-muted-foreground">日期范围</p>
       <div className="grid gap-1">
         {presets.map(({ label, shortcut, from, to }) => {
           const isActive = selected?.from === from && selected?.to === to;
@@ -188,11 +188,11 @@ function DatePresetsSelect({
       }}
     >
       <SelectTrigger>
-        <SelectValue placeholder="Date Presets" />
+        <SelectValue placeholder="日期预设" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Date Presets</SelectLabel>
+          <SelectLabel>日期预设</SelectLabel>
           {presets.map(({ label, shortcut }) => {
             return (
               <SelectItem
@@ -246,10 +246,10 @@ function CustomDateRange({
 
   return (
     <div className="flex flex-col gap-2 p-3">
-      <p className="text-xs uppercase text-muted-foreground">Custom Range</p>
+      <p className="text-xs uppercase text-muted-foreground">自定义范围</p>
       <div className="grid gap-2 sm:grid-cols-2">
         <div className="grid w-full gap-1.5">
-          <Label htmlFor="from">Start</Label>
+          <Label htmlFor="from">开始时间</Label>
           <Input
             key={formatDateForInput(selected?.from)}
             type="datetime-local"
@@ -266,7 +266,7 @@ function CustomDateRange({
           />
         </div>
         <div className="grid w-full gap-1.5">
-          <Label htmlFor="to">End</Label>
+          <Label htmlFor="to">结束时间</Label>
           <Input
             key={formatDateForInput(selected?.to)}
             type="datetime-local"

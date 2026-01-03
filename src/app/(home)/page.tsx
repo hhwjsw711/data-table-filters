@@ -318,24 +318,23 @@ function Hero() {
     <div className="flex flex-col-reverse items-start justify-between gap-8 sm:flex-row">
       <div className="max-w-4xl">
         <h1 className="mb-4 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
-          Powerful <span className="text-nowrap">Data-Table</span> for React
+          强大的React<span className="text-nowrap">数据表格</span>组件
         </h1>
         {/* REMINDER: text-balance produces layout shifts on iOS here - maybe due to arrow svg? */}
         <p className="max-w-[650px] text-lg text-muted-foreground">
-          Extensible, fast, and easy-to-use filters with{" "}
+          基于{" "}
           <Link href="https://tanstack.com/table" className="text-nowrap">
             tanstack table
           </Link>
-          ,{" "}
+          、{" "}
           <Link href="https://ui.shadcn.com" className="text-nowrap">
             shadcn/ui
           </Link>{" "}
-          and search params via <Link href="https://nuqs.47ng.com">nuqs</Link>.
-          Open Source on{" "}
+          和 <Link href="https://nuqs.47ng.com">nuqs</Link> 实现的可扩展、快速、易用的过滤数据表格。在{" "}
           <Link href="https://github.com/openstatusHQ/data-table-filters">
             GitHub
           </Link>
-          .
+          {" "}上开源。
         </p>
       </div>
       <NextLink
@@ -396,7 +395,7 @@ const changelog: {
 function Changelog() {
   return (
     <div className="grid gap-2">
-      <p className="font-medium">Changelog</p>
+      <p className="font-medium">更新日志</p>
       <ul className="grid gap-2">
         {changelog.map((item, i) => {
           return (
@@ -420,7 +419,7 @@ function Changelog() {
 function Examples() {
   return (
     <div className="flex flex-col gap-2">
-      <p className="font-medium">More Examples</p>
+      <p className="font-medium">更多示例</p>
       <ul
         role="list"
         className="grid list-inside list-disc gap-2 marker:text-muted-foreground"
@@ -440,7 +439,7 @@ function GuideBadgeLink({ className }: { className?: string }) {
         variant="outline"
         className="border-dashed border-border bg-background pr-1.5"
       >
-        Guide{" "}
+        指南{" "}
         <ArrowRight className="relative mb-[1px] inline h-3 w-0 transition-all group-hover:w-3" />
         <ChevronRight className="relative mb-[1px] inline h-3 w-3 transition-all group-hover:w-0" />
       </Badge>

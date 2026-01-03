@@ -61,7 +61,7 @@ function getRandomStatusCode() {
 }
 
 function getMessage() {
-  return 'ERR_INTERNAL_DISASTER: "The server spilled coffee on itself."';
+  return '内部错误：服务器遇到内部故障。';
 }
 
 const shopPathnames = [

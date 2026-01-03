@@ -53,7 +53,7 @@ export function DataTableViewOptions() {
           className="h-9 w-9"
         >
           <Settings2 className="h-4 w-4" />
-          <span className="sr-only">View</span>
+          <span className="sr-only">视图</span>
         </Button>
       </PopoverTrigger>
       <PopoverContent side="bottom" align="end" className="w-[200px] p-0">
@@ -61,10 +61,10 @@ export function DataTableViewOptions() {
           <CommandInput
             value={search}
             onValueChange={setSearch}
-            placeholder="Search options..."
+            placeholder="搜索选项..."
           />
           <CommandList>
-            <CommandEmpty>No option found.</CommandEmpty>
+            <CommandEmpty>未找到选项。</CommandEmpty>
             <CommandGroup>
               <Sortable
                 value={sortedColumns.map((c) => ({ id: c.id }))}

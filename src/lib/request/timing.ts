@@ -30,15 +30,15 @@ export function getTimingLabel(timing: TimingPhase) {
     case "timing.dns":
       return "DNS";
     case "timing.connection":
-      return "Connection";
+      return "连接";
     case "timing.tls":
       return "TLS";
     case "timing.ttfb":
       return "TTFB";
     case "timing.transfer":
-      return "Transfer";
+      return "传输";
     default:
-      return "Unknown";
+      return "未知";
   }
 }
 

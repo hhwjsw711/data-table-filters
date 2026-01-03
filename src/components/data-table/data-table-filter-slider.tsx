@@ -62,10 +62,10 @@ export function DataTableFilterSlider<TData>({
             htmlFor={`min-${value}`}
             className="px-2 text-muted-foreground"
           >
-            Min.
+            最小值
           </Label>
           <InputWithAddons
-            placeholder="from"
+            placeholder="起始值"
             trailing="ms"
             containerClassName="mb-2 h-9 rounded-lg"
             type="number"
@@ -84,10 +84,10 @@ export function DataTableFilterSlider<TData>({
             htmlFor={`max-${value}`}
             className="px-2 text-muted-foreground"
           >
-            Max.
+            最大值
           </Label>
           <InputWithAddons
-            placeholder="to"
+            placeholder="结束值"
             trailing="ms"
             containerClassName="mb-2 h-9 rounded-lg"
             type="number"

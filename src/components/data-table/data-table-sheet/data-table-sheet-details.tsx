@@ -133,12 +133,12 @@ export function DataTableSheetDetails({
                       onClick={onPrev}
                     >
                       <ChevronUp className="h-5 w-5" />
-                      <span className="sr-only">Previous</span>
+                      <span className="sr-only">上一条</span>
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>
-                      Navigate <Kbd variant="outline">↑</Kbd>
+                      导航 <Kbd variant="outline">↑</Kbd>
                     </p>
                   </TooltipContent>
                 </Tooltip>
@@ -154,12 +154,12 @@ export function DataTableSheetDetails({
                       onClick={onNext}
                     >
                       <ChevronDown className="h-5 w-5" />
-                      <span className="sr-only">Next</span>
+                      <span className="sr-only">下一条</span>
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>
-                      Navigate <Kbd variant="outline">↓</Kbd>
+                      导航 <Kbd variant="outline">↓</Kbd>
                     </p>
                   </TooltipContent>
                 </Tooltip>
@@ -168,14 +168,14 @@ export function DataTableSheetDetails({
               <SheetClose autoFocus={true} asChild>
                 <Button size="icon" variant="ghost" className="h-7 w-7">
                   <X className="h-5 w-5" />
-                  <span className="sr-only">Close</span>
+                  <span className="sr-only">关闭</span>
                 </Button>
               </SheetClose>
             </div>
           </div>
         </SheetHeader>
         <SheetDescription className="sr-only">
-          Selected row details
+          所选行详细信息
         </SheetDescription>
         <div className="p-4">{children}</div>
       </SheetContent>

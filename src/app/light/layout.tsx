@@ -22,7 +22,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         asChild
       >
         <Link id="skip-to-content" href="#content">
-          Skip to content
+          跳转到内容
         </Link>
       </Button>
       {children}
@@ -45,7 +45,7 @@ function ButtonPile() {
           target="_blank"
           rel="noreferrer"
         >
-          <span className="mr-1">View GitHub Repo</span>
+          <span className="mr-1">查看GitHub仓库</span>
           <ArrowRight className="relative mb-[1px] inline h-4 w-0 transition-all group-hover:w-4" />
           <ChevronRight className="relative mb-[1px] inline h-4 w-4 transition-all group-hover:w-0" />
         </a>
@@ -55,7 +55,7 @@ function ButtonPile() {
         className="group absolute -right-1.5 top-0 -z-10 opacity-70 transition-transform group-hover/pile:-translate-x-1.5 group-hover/pile:-translate-y-10 group-hover/pile:opacity-100"
       >
         <a href="https://light.openstatus.dev" target="_blank" rel="noreferrer">
-          <span className="mr-1">Explore Light OS</span>
+          <span className="mr-1">探索Light OS</span>
           <ArrowRight className="relative mb-[1px] inline h-4 w-0 transition-all group-hover:w-4" />
           <ChevronRight className="relative mb-[1px] inline h-4 w-4 transition-all group-hover:w-0" />
         </a>
@@ -122,7 +122,7 @@ function APIPopover() {
           <form className="flex items-center gap-2" onSubmit={handleSubmit}>
             <div className="flex-1">
               <Label htmlFor="endpoint" className="sr-only">
-                Endpoint
+                端点
               </Label>
               <Input
                 type="url"
@@ -137,7 +137,7 @@ function APIPopover() {
             </div>
             <Button type="submit" size="icon" className="h-8 w-8">
               <Zap className="h-4 w-4" />
-              <span className="sr-only">Save</span>
+              <span className="sr-only">保存</span>
             </Button>
           </form>
         </div>

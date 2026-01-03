@@ -48,7 +48,7 @@ export function DataTableColumnTimestamp({
           {...{ side, align, alignOffset, sideOffset }}
         >
           <dl className="flex flex-col gap-1">
-            <Row value={String(date.getTime())} label="Timestamp" />
+            <Row value={String(date.getTime())} label="时间戳" />
             <Row
               value={format(new UTCDate(date), "LLL dd, y HH:mm:ss")}
               label="UTC"
@@ -56,7 +56,7 @@ export function DataTableColumnTimestamp({
             <Row value={format(date, "LLL dd, y HH:mm:ss")} label={timezone} />
             <Row
               value={formatDistanceToNowStrict(date, { addSuffix: true })}
-              label="Relative"
+              label="相对时间"
             />
           </dl>
         </HoverCardContent>

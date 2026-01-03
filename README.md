@@ -1,30 +1,30 @@
-## About The Project
+## 关于本项目
 
-This is a standalone data-table demo that we will be using within the [OpenStatus](https://openstatus.dev) dashboard.
+本项目是一个独立的数据表格演示应用，将应用于[OpenStatus](https://openstatus.dev)控制台。
 
 ![Data Table with Infinite Scroll](https://data-table.openstatus.dev/assets/data-table-infinite.png)
 
-Visit [data-table.openstatus.dev](https://data-table.openstatus.dev) to learn more.
+访问[data-table.openstatus.dev](https://data-table.openstatus.dev)了解更多信息。
 
-To make it not only more accessible for you to use, but also work on PoC/MVP with data-tables, we have started this repository. We will maintain it and add new examples over time.
+为了使您更便捷地使用数据表格，并可基于此开展概念验证/最小可行产品开发工作，我们创建了本代码仓库。我们将持续维护并定期增加新的示例。
 
-It currently includes two main concepts:
+当前包含两个核心功能：
 
-- [data-table with simple pagination](https://data-table.openstatus.dev/default) (client-side)
-- [data-table with infinite scroll and click details](https://data-table.openstatus.dev/infinite) (server-side)
+- [简单分页数据表格](https://data-table.openstatus.dev/default)（客户端分页）
+- [无限滚动及点击详情数据表格](https://data-table.openstatus.dev/infinite)（服务端分页）
 
-The UI is heavily inspired by datadog and vercel log tables.
+用户界面设计参考了Datadog和Vercel日志表格。
 
 > [!NOTE]
-> We are working on a [Guide](https://data-table.openstatus.dev/guide) to help you get started and not wild guess anymore.
+> 我们正在编写[使用指南](https://data-table.openstatus.dev/guide)，帮助您快速上手，减少试错成本。
 
-More Examples:
+更多示例：
 
-- [OpenStatus Light Viewer](https://data-table.openstatus.dev/light) (UI for [`vercel-edge-ping`](https://github.com/OpenStatusHQ/vercel-edge-ping))
+- [OpenStatus轻量级查看器](https://data-table.openstatus.dev/light)（[`vercel-edge-ping`](https://github.com/OpenStatusHQ/vercel-edge-ping)的用户界面）
 
-## Built With
+## 技术栈
 
-Our stack is:
+本项目采用以下技术：
 
 - [nextjs](https://nextjs.org)
 - [tanstack-query](https://tanstack.com/query/latest)
@@ -34,23 +34,23 @@ Our stack is:
 - [nuqs](http://nuqs.47ng.com)
 - [dnd-kit](https://dndkit.com)
 
-We will consider making an example with [vitejs](https://vitejs.dev) for all our raw react lovers. **Contributions are welcome!**
+我们将考虑为React开发者提供基于[vitejs](https://vitejs.dev)的示例。**欢迎贡献代码！**
 
-## Getting Started
+## 快速开始
 
-No environment variable required. Run the development server:
+无需配置环境变量。运行开发服务器：
 
 ```bash
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+在浏览器中打开[http://localhost:3000](http://localhost:3000)查看应用。
 
-## Want more?
+## 需要更多支持？
 
-If you are looking for specific use-cases or like what we are building and want to hire us, feel free write us to [hire@openstatus.dev](mailto:hire@openstatus.dev) or book a call via [cal.com](https://cal.com/team/openstatus/30min).
+如果您有特定的使用场景需求，或对我们的工作感兴趣并希望寻求合作，请发送邮件至[hire@openstatus.dev](mailto:hire@openstatus.dev)，或通过[cal.com](https://cal.com/team/openstatus/30min)预约会议。
 
-## Credits
+## 致谢
 
-- [sadmann17](https://x.com/sadmann17) for the dope `<Sortable />` component around `@dnd-kit` (see [sortable.sadmn.com](https://sortable.sadmn.com))
-- [shelwin\_](https://x.com/shelwin_) for the draggable chart inspiration (see [zoom-chart-demo.vercel.app](https://zoom-chart-demo.vercel.app))
+- [sadmann17](https://x.com/sadmann17)提供基于`@dnd-kit`的优秀`<Sortable />`组件（参见[sortable.sadmn.com](https://sortable.sadmn.com)）
+- [shelwin\_](https://x.com/shelwin_)提供可拖拽图表设计灵感（参见[zoom-chart-demo.vercel.app](https://zoom-chart-demo.vercel.app)）

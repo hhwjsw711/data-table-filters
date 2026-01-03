@@ -1,31 +1,31 @@
-## Guide (WIP)
+## 使用指南（编写中）
 
-<span className="text-muted-foreground font-medium">As of: {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</span>
+<span className="text-muted-foreground font-medium">更新日期：{new Date().toLocaleDateString("zh-CN", { month: "long", day: "numeric", year: "numeric" })}</span>
 
-This helps you to get started with the data-table and define the columns, filters, search params, sheet fields and more.
+本指南将帮助您快速上手数据表格，并指导您定义列、过滤器、搜索参数、详情面板字段等配置。
 
-> If you have any questions, feature request please open an issue on [GitHub](https://github.com/openstatusHQ/data-table-filters/issues). This is a work in progress and we are happy to hear from you.
+> 如有任何疑问或功能需求，请在[GitHub](https://github.com/openstatusHQ/data-table-filters/issues)上提交问题。本指南仍在编写中，我们期待您的反馈。
 
-Remember, we are using the shadcn/ui components. Some modifications still live in `src/components/custom/*` but will eventually be migrating back to shadcn/ui to be fully compliant.
+请注意，本项目使用shadcn/ui组件库。部分自定义修改目前存放在`src/components/custom/*`目录下，未来将逐步迁移回shadcn/ui以保持完全兼容。
 
-The infinite scrollable data-table is mainly composed of the following parts:
-- `DataTableFilterControls`: the left sidebar controls
-- `DataTableFilterCommand`: the cmdk input
-- `DataTableInfinite`: the infinite data-table
-- `DataTableDetailsSheet`: the details sheet
-- `TimelineChart`: the timeline chart
+无限滚动数据表格主要由以下部分组成：
+- `DataTableFilterControls`：左侧边栏控制面板
+- `DataTableFilterCommand`：命令输入框(cmdk)
+- `DataTableInfinite`：无限滚动数据表格
+- `DataTableDetailsSheet`：详情面板
+- `TimelineChart`：时间线图表
 
-You will have full control over the data-table and the components that are rendered. Feel free to extend, modify or remove components as you see fit.
+您可以完全控制数据表格及其渲染的组件。可根据需要自由扩展、修改或移除组件。
 
-## Table
+## 数据表格
 
-### Table Columns
+### 表格列定义
 
-The `columns.tsx` file is our known source of truth for the columns. If you are familiar with shadcn, you should feel right at home. Check out the shadcn/ui [docs](https://ui.shadcn.com/docs/components/data-table) for more information.
+`columns.tsx`文件是列定义的权威数据源。如果您熟悉shadcn，应该会感到得心应手。详细信息请查看shadcn/ui[文档](https://ui.shadcn.com/docs/components/data-table)。
 
-#### Extending Tanstack Table Types
+#### 扩展Tanstack Table类型
 
-We extend the meta types mainly for _styling_ and _filter functions_. That way, we can avoid changing the data-table components itself.
+我们主要通过扩展元数据类型来实现_样式定义_和_过滤函数_功能。这样可以避免直接修改数据表格组件本身。
 
 ```tsx
 import "@tanstack/react-table";
@@ -70,11 +70,11 @@ declare module "@tanstack/react-table" {
 }
 ```
 
-### Table Rows
+### 表格行
 
-The more data you have, the more you need to think about how to render the rows, especially in an infinitely scrollable data-table.
+数据量越大，越需要考虑行的渲染方式，特别是在无限滚动数据表格中。
 
-We currently memoize with a custom deps function to avoid re-rendering the rows when the data is the same.
+当前我们使用自定义依赖函数进行记忆化处理，以避免在数据相同时重复渲染行。
 
 ```tsx
 const MemoizedRow = React.memo(
@@ -86,30 +86,30 @@ const MemoizedRow = React.memo(
 ) as typeof Row;
 ```
 
-The row re-renders only if the `id` or `selected` state of the row changes, and with the `useQueryState` hook, we force a re-render when the `live` param changes (making the `getRowClassName` prop being called to set an opacity to the row).
+仅当行的`id`或`selected`状态发生变化时才会重新渲染。通过`useQueryState`钩子，我们在`live`参数变化时强制重新渲染（调用`getRowClassName`属性为行设置不透明度）。
 
-> At a certain point we need to think adding `@tanstack/react-virtual` to the mix.
+> 在某个时点，我们需要考虑引入`@tanstack/react-virtual`库。
 
 
 
-## Filters
+## 过滤器
 
-Right now, we need to define the filters in two places:
+当前需要在两个位置定义过滤器：
 
-- `filterFields` in the `constants.tsx` file
-- `searchParams` in the `search-params.ts` file
+- `constants.tsx`文件中的`filterFields`
+- `search-params.ts`文件中的`searchParams`
 
-The main reason for this is that we want to keep the `filterFields` as the source of truth for the filters. The `searchParams` are used to filter the data on the server side and to build the search command. Both are synced.
+主要原因是我们希望将`filterFields`作为过滤器的权威数据源。`searchParams`用于服务端数据过滤和构建搜索命令。两者保持同步。
 
-> It would be great if we could merge both values, the `filterFields` and the `searchParams` together and have a single source of truth. - Or make both types extend a single type for better type safety. Hopefully, we can achieve this in the future.
+> 理想情况下，应该将`filterFields`和`searchParams`合并为单一数据源，或使两种类型扩展自同一基础类型以提高类型安全性。我们希望未来能够实现这一目标。
 
-### filterFields
+### filterFields（过滤字段）
 
-The `filterFields` array within the `constants.tsx` file is what defines the left sidebar controls of the data-table and the cmdk input items.
+`constants.tsx`文件中的`filterFields`数组定义了数据表格左侧边栏控制面板和cmdk输入项。
 
-The _input_, _checkbox_, _slider_ and _timerange_ types are currently supported.
+当前支持_input（输入）_、_checkbox（复选框）_、_slider（滑块）_和_timerange（时间范围）_类型。
 
-All types extend the `Base` type which defines the following properties:
+所有类型均扩展自`Base`基础类型，该类型定义了以下属性：
 
 ```ts
 export type Base<TData> = {
@@ -132,7 +132,7 @@ export type Base<TData> = {
 };
 ```
 
-To support the cmdk input, we need to define the `options` property for all types.
+为支持cmdk输入，需要为所有类型定义`options`属性。
 
 ```ts
 export type Option = {
@@ -141,11 +141,11 @@ export type Option = {
 };
 ```
 
-#### Input
+#### Input（输入类型）
 
-For the `input` type, there is nothing to define. 
+`input`类型无需额外定义。
 
-Within the Controls sidebar, it will be rendered as a simple text input field. The cmdk input will list all the defined `options` once the value is selected.
+在控制侧边栏中，将渲染为简单的文本输入字段。选择值后，cmdk输入框将列出所有已定义的`options`。
 
 ```ts
 export type Input = {
@@ -154,11 +154,11 @@ export type Input = {
 };
 ```
 
-**Limitations**: Spaces cannot be used in the input value as they get interpreted as a separator in the cmdk input (and vice versa). An issue [#27](https://github.com/openstatusHQ/data-table-filters/issues/27) is open to tackle this.
+**限制**：输入值中不能使用空格，因为空格会被cmdk输入框解释为分隔符（反之亦然）。我们已创建issue [#27](https://github.com/openstatusHQ/data-table-filters/issues/27)来解决此问题。
 
-#### Checkbox
+#### Checkbox（复选框类型）
 
-The `checkbox` type will be rendered the options as list of checkboxes in the Controls sidebar. If there are more than 5 options, a search input will be included on top of the list to filter the options. The cmdk input will list all the defined `options` once the value is selected. You can also define a custom component to be rendered for each option.
+`checkbox`类型将在控制侧边栏中将选项渲染为复选框列表。如果选项超过5个，列表顶部将包含搜索输入框以过滤选项。选择值后，cmdk输入框将列出所有已定义的`options`。您还可以为每个选项定义自定义渲染组件。
 
 ```ts
 export type Checkbox = {
@@ -168,11 +168,11 @@ export type Checkbox = {
 };
 ```
 
-> Currently, only the `checkbox` type has a `component` prop. This is used to render a custom checkbox component.
+> 当前仅`checkbox`类型支持`component`属性。该属性用于渲染自定义复选框组件。
 
-#### Slider
+#### Slider（滑块类型）
 
-The `slider` type will be rendered as a slider in the Controls sidebar and have a min and max value input field. The cmdk input will list all the defined `options` once the value is selected.
+`slider`类型将在控制侧边栏中渲染为滑块，并包含最小值和最大值输入字段。选择值后，cmdk输入框将列出所有已定义的`options`。
 
 ```ts
 export type Slider = {
@@ -183,11 +183,11 @@ export type Slider = {
 };
 ```
 
-#### Timerange
+#### Timerange（时间范围类型）
 
-The `timerange` type will be rendered as a timerange input field in the Controls sidebar. The **cmdk input does not yet support the timerange input**, please disable the cmdk input for the timerange filter field via `commandDisabled: true`.
+`timerange`类型将在控制侧边栏中渲染为时间范围输入字段。**cmdk输入框暂不支持时间范围输入**，请通过`commandDisabled: true`禁用时间范围过滤字段的cmdk输入。
 
-A `DatePreset` can be defined to preset the timerange values. It allows you easily select a range of dates (e.g. last 7 days, last 30 days, last 3 months, last year, etc.).
+可定义`DatePreset`来预设时间范围值。这允许您轻松选择日期范围（例如：最近7天、最近30天、最近3个月、去年等）。
 
 ```ts
 export type DatePreset = {
@@ -204,28 +204,28 @@ export type Timerange = {
 };
 ```
 
-### Search Params
+### 搜索参数
 
-The `searchParams` array within the `search-params.ts` file is what defines the search params that are used to filter the data in the data-table.
+`search-params.ts`文件中的`searchParams`数组定义了用于数据表格数据过滤的搜索参数。
 
-It mainly includes the same fields as the `filterFields` array - but defined with the `nuqs` parser functions.
+它主要包含与`filterFields`数组相同的字段，但使用`nuqs`解析器函数定义。
 
-**Make sure to have both the `filterFields` and the `searchParams` in sync.**
+**务必确保`filterFields`和`searchParams`保持同步。**
 
-## Details Sheet
+## 详情面板
 
-The `sheetFields` array within the `constants.tsx` file is what defines the components inside of the `Sheet` component that is rendered when you select a row in the data-table.
+`constants.tsx`文件中的`sheetFields`数组定义了在数据表格中选择行时渲染的`Sheet`组件内部的组件。
 
-> Yet to be implemented: only trigger a selection if the `sheetFields` is defined.
+> 待实现：仅在定义了`sheetFields`时才触发选择功能。
 
 
-By default, we will wrap every key-value pair with the `DataTableSheetRowAction` component that will allow you to filter the data-table based on the selected row. Based on the `type`, we will support different filter selections.
+默认情况下，每个键值对都会使用`DataTableSheetRowAction`组件包装，该组件允许您基于选定行过滤数据表格。根据`type`类型，支持不同的过滤选项。
 
-> We should use the same types for the `filterFields` and the `sheetFields` to avoid confusion and create a `readonly: boolean` type to avoid that the value is not filterable from the sheet.
+> 应将`filterFields`和`sheetFields`使用相同的类型，避免混淆，并创建`readonly: boolean`类型以防止从详情面板中过滤该值。
 
-We allow you to override the default behavior by providing a custom component.
+允许通过提供自定义组件来覆盖默认行为。
 
-When loading the sheet and if the data is not available yet, we will show a skeleton component.
+加载详情面板时，如果数据尚未可用，将显示骨架屏组件。
 
 ```ts
 export type SheetField<TData, TMeta = Record<string, unknown>> = {
@@ -268,16 +268,16 @@ export type SheetField<TData, TMeta = Record<string, unknown>> = {
 };
 ```
 
-## API
+## API接口
 
-We use `@tanstack/react-query` and its `useInfiniteQuery` method to fetch the data.
+我们使用`@tanstack/react-query`及其`useInfiniteQuery`方法获取数据。
 
-To share the same search options between the client and the server, we use the same `searchParams` array from the `search-params.ts` file within our `route.ts` file. Based on the filters, we query the mock data and return the results.
+为了在客户端和服务端之间共享相同的搜索选项，我们在`route.ts`文件中使用`search-params.ts`文件中的相同`searchParams`数组。根据过滤器，查询模拟数据并返回结果。
 
-It will be up to you to implement the actual API endpoint and query the data from your database.
+您需要自行实现实际的API端点并从数据库查询数据。
 
 
-You API has to return the following data:
+您的API必须返回以下数据：
 
 ```ts
 export async function GET(req: Request) {
@@ -291,11 +291,11 @@ export async function GET(req: Request) {
 }
 ```
 
-We initially started with `size` and `start`, making `size*start` the offset but it has some drawbacks when it comes to live mode. Instead, we use the `cursor` to mark a timestamp and the `direction` to determine the direction of the pagination - `"prev"` for live mode or `"next"` for load more. If you don't need live mode, you can ignore the `prevCursor` and `fetchPreviousPage` (including the `LiveButton` component).
+最初我们使用`size`和`start`，通过`size*start`计算偏移量，但这种方式在实时模式下存在缺陷。现在我们使用`cursor`标记时间戳，使用`direction`确定分页方向——实时模式使用`"prev"`，加载更多使用`"next"`。如果不需要实时模式，可以忽略`prevCursor`和`fetchPreviousPage`（包括`LiveButton`组件）。
 
-To parse the response, we use [`superjson`](https://github.com/flightcontrolhq/superjson) to serialize and deserialize the data. This is especially useful when using `Date` objects or other non-serializable values.
+为解析响应，我们使用[`superjson`](https://github.com/flightcontrolhq/superjson)序列化和反序列化数据。这在使用`Date`对象或其他不可序列化值时特别有用。
 
-The `meta` object allows us to return additional data that is not part of the `data` array. That can be data for the chart like `chartData`, or statistics to be used in the `Sheet` component like `currentPercentiles`.
+`meta`对象允许返回不属于`data`数组的额外数据。可以是图表数据（如`chartData`），或用于`Sheet`组件的统计数据（如`currentPercentiles`）。
 
 ```ts
 export type InfiniteQueryMeta<TMeta = Record<string, unknown>> = {
@@ -334,11 +334,11 @@ type LogsMeta = {
 };
 ```
 
-## More
+## 更多功能
 
-### Timeline Chart
+### 时间线图表
 
-The timeline chart helps you to visualize the data over time. It utilizes the shadcn component (checkout out the [docs](https://ui.shadcn.com/docs/components/chart)) and renders the bars based on the the amount of data items you defined.
+时间线图表帮助您可视化随时间变化的数据。它使用shadcn组件（查看[文档](https://ui.shadcn.com/docs/components/chart)），根据您定义的数据项数量渲染柱状图。
 
 ```ts
 type BaseChartSchema = {
@@ -355,27 +355,28 @@ interface TimelineChartProps<TChart extends BaseChartSchema> = {
 }
 ```
 
-As default, the data keys are coming from the `level` field that takes "**success**", "**warning**", "**error**" as values.
+默认情况下，数据键来自`level`字段，该字段接受"**success**"、"**warning**"、"**error**"作为值。
 
-> The `TimelineChart` component is currently not configurable (especially the labels/tooltips) via props but will be in the future. You'll have to update the component yourself to adapt to your needs.
+> `TimelineChart`组件当前无法通过属性配置（特别是标签/工具提示），但未来将支持。您需要自行更新组件以适应您的需求。
 
-### Live Mode
+### 实时模式
 
-The live mode is a feature that allows you to see the data in real-time.
+实时模式功能允许您实时查看数据。
 
-We append the `live` param to the search params parser (**not** the filter fields) to make trigger a new fetch every 4 seconds. Thanks to the search params, the live mode retains after a page reload.
+我们在搜索参数解析器中添加`live`参数（**不是**过滤字段），以每4秒触发一次新的数据获取。借助搜索参数，实时模式在页面重新加载后仍保持激活状态。
 
-The `fetchPreviousPage` from the the `useInfiniteQuery` is being used. The newly fetched data will be appended to the beginning of the data array. (contrary to the `fetchNextPage` which appends to the end of the data array)
 
-For the demo, we add some mock data in the future to see the live mode in action. At some point, no more can be fetcheed anymore. You'll need to refresh the page or wait for the cache to miss. 
+使用`useInfiniteQuery`的`fetchPreviousPage`方法。新获取的数据将添加到数据数组的开头（与`fetchNextPage`相反，后者添加到末尾）。
 
-## Debugging
+在演示中，我们在未来添加了一些模拟数据以展示实时模式效果。到某个时点，将无法获取更多数据。您需要刷新页面或等待缓存失效。
 
-We use `react-scan` to for performance debugging. It will show you the components that are being re-rendered. You can enable it by setting the `NEXT_PUBLIC_REACT_SCAN` environment variable to `true` and is automatically enabled in the development environment.
+## 调试
 
-For tanstack query, we use the `ReactQueryDevtools` to see the queries and mutations. It automatically shows up in the development environment.
+我们使用`react-scan`进行性能调试。它会显示正在重新渲染的组件。您可以通过将`NEXT_PUBLIC_REACT_SCAN`环境变量设置为`true`来启用，开发环境下会自动启用。
 
-Tanstack table debug logs can be enabled by setting the `NEXT_PUBLIC_TABLE_DEBUG` environment variable to `true`.
+对于tanstack query，我们使用`ReactQueryDevtools`查看查询和变更。它在开发环境下自动显示。
+
+可以通过将`NEXT_PUBLIC_TABLE_DEBUG`环境变量设置为`true`来启用Tanstack table调试日志。
 
 ```
 # .env.local

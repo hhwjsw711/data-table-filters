@@ -66,6 +66,6 @@ export function getLevelLabel(value: (typeof _LEVELS)[number]): string {
     case "error":
       return "5xx";
     default:
-      return "Unknown";
+      return "未知";
   }
 }

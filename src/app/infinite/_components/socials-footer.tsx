@@ -50,41 +50,41 @@ export function SocialsFooter() {
         </Button>
       </div>
       <p className="text-center text-xs text-muted-foreground">
-        Powered by{" "}
+        技术支持：{" "}
         <Link href="https://openstatus.dev" hideArrow>
           OpenStatus
         </Link>
       </p>
       <p className="text-center text-[10px] text-muted-foreground">
-        The project is in active development. For feedback, please{" "}
+        本项目正在积极开发中。如有任何反馈，请在GitHub上{" "}
         <Link
           href="https://github.com/openstatusHQ/data-table-filters/issues/new"
           className="text-muted-foreground"
           hideArrow
         >
-          open an issue
-        </Link>{" "}
-        on GitHub.
+          提交问题
+        </Link>
+        。
       </p>
     </div>
   );
 }
 
 const hotkeys = [
-  { key: "K", description: "Toggle command input" },
-  { key: "B", description: "Toggle sidebar controls" },
+  { key: "K", description: "切换命令输入" },
+  { key: "B", description: "切换侧边栏控制" },
   {
     key: "U",
-    description: "Undo column state (order, visibility)",
+    description: "撤销列状态（顺序、可见性）",
   },
   {
     key: "J",
-    description: "Toggle live mode",
+    description: "切换实时模式",
   },
-  { key: "Esc", description: "Reset table filters" },
+  { key: "Esc", description: "重置表格过滤器" },
   {
     key: ".",
-    description: "Reset element focus to start",
+    description: "重置元素焦点到起始位置",
   },
 ];
 

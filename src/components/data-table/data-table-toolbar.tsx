@@ -51,19 +51,19 @@ export function DataTableToolbar({ renderActions }: DataTableToolbarProps) {
                 {open ? (
                   <>
                     <PanelLeftClose className="h-4 w-4" />
-                    <span className="hidden md:block">Hide Controls</span>
+                    <span className="hidden md:block">隐藏控制面板</span>
                   </>
                 ) : (
                   <>
                     <PanelLeftOpen className="h-4 w-4" />
-                    <span className="hidden md:block">Show Controls</span>
+                    <span className="hidden md:block">显示控制面板</span>
                   </>
                 )}
               </Button>
             </TooltipTrigger>
             <TooltipContent side="right">
               <p>
-                Toggle controls with{" "}
+                切换控制面板{" "}
                 <Kbd className="ml-1 text-muted-foreground group-hover:text-accent-foreground">
                   <span className="mr-1">⌘</span>
                   <span>B</span>
@@ -80,17 +80,17 @@ export function DataTableToolbar({ renderActions }: DataTableToolbarProps) {
             <span className="font-mono font-medium">
               {formatCompactNumber(rows.filtered)}
             </span>{" "}
-            of{" "}
+            条，共{" "}
             <span className="font-mono font-medium">
               {formatCompactNumber(rows.total)}
             </span>{" "}
-            row(s) <span className="sr-only sm:not-sr-only">filtered</span>
+            行 <span className="sr-only sm:not-sr-only">已过滤</span>
           </p>
           <p className="block text-sm text-muted-foreground sm:hidden">
             <span className="font-mono font-medium">
               {formatCompactNumber(rows.filtered)}
             </span>{" "}
-            row(s)
+            行
           </p>
         </div>
       </div>

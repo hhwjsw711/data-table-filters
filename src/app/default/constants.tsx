@@ -12,26 +12,26 @@ import type { ColumnSchema } from "./types";
 
 export const filterFields = [
   {
-    label: "Time Range",
+    label: "时间范围",
     value: "date",
     type: "timerange",
     defaultOpen: true,
     commandDisabled: true,
   },
   {
-    label: "URL",
+    label: "网址",
     value: "url",
     type: "input",
     options: data.map(({ url }) => ({ label: url, value: url })),
   },
   {
-    label: "Public",
+    label: "公开",
     value: "public",
     type: "checkbox",
     options: [true, false].map((bool) => ({ label: `${bool}`, value: bool })),
   },
   {
-    label: "Active",
+    label: "激活",
     value: "active",
     type: "checkbox",
     options: [true, false].map((bool) => ({ label: `${bool}`, value: bool })),
@@ -46,13 +46,13 @@ export const filterFields = [
     defaultOpen: true,
   },
   {
-    label: "Regions",
+    label: "地区",
     value: "regions",
     type: "checkbox",
     options: REGIONS.map((region) => ({ label: region, value: region })),
   },
   {
-    label: "Tags",
+    label: "标签",
     value: "tags",
     type: "checkbox",
     defaultOpen: true,

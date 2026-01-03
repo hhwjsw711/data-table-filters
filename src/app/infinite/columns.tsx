@@ -48,7 +48,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
   {
     accessorKey: "date",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Date" />
+      <DataTableColumnHeader column={column} title="日期" />
     ),
     cell: ({ row }) => {
       const date = new Date(row.getValue<ColumnSchema["date"]>("date"));
@@ -68,7 +68,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
   {
     id: "uuid",
     accessorKey: "uuid",
-    header: "Request Id",
+    header: "请求ID",
     cell: ({ row }) => {
       const value = row.getValue<ColumnSchema["uuid"]>("uuid");
       return <TextWithTooltip text={value} />;
@@ -76,7 +76,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
     size: 130,
     minSize: 130,
     meta: {
-      label: "Request Id",
+      label: "请求ID",
       cellClassName:
         "font-mono w-[--col-uuid-size] max-w-[--col-uuid-size] min-w-[--col-uuid-size]",
       headerClassName:
@@ -85,7 +85,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: "状态",
     cell: ({ row }) => {
       const value = row.getValue<ColumnSchema["status"]>("status");
       return <DataTableColumnStatusCode value={value} />;
@@ -104,7 +104,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
   {
     // TODO: make it a type of MethodSchema!
     accessorKey: "method",
-    header: "Method",
+    header: "方法",
     filterFn: "arrIncludesSome",
     enableResizing: false,
     size: 69,
@@ -118,7 +118,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
   },
   {
     accessorKey: "host",
-    header: "Host",
+    header: "主机",
     cell: ({ row }) => {
       const value = row.getValue<ColumnSchema["host"]>("host");
       return <TextWithTooltip text={value} />;
@@ -132,7 +132,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
   },
   {
     accessorKey: "pathname",
-    header: "Pathname",
+    header: "路径",
     cell: ({ row }) => {
       const value = row.getValue<ColumnSchema["pathname"]>("pathname");
       return <TextWithTooltip text={value} />;
@@ -150,7 +150,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
     accessorKey: "latency",
     // TODO: check if we can right align the table header/cell (makes is easier to read)
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Latency" />
+      <DataTableColumnHeader column={column} title="延迟" />
     ),
     cell: ({ row }) => {
       const value = row.getValue<ColumnSchema["latency"]>("latency");
@@ -169,7 +169,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
   },
   {
     accessorKey: "regions",
-    header: "Region",
+    header: "地区",
     cell: ({ row }) => {
       const value = row.getValue<ColumnSchema["regions"]>("regions");
       if (Array.isArray(value)) {
@@ -203,7 +203,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
   },
   {
     accessorKey: "timing",
-    header: () => <div className="whitespace-nowrap">Timing Phases</div>,
+    header: () => <div className="whitespace-nowrap">时序阶段</div>,
     cell: ({ row }) => {
       const timing = {
         "timing.dns": row.getValue<ColumnSchema["timing.dns"]>("timing.dns"),
@@ -279,7 +279,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
     size: 130,
     minSize: 130,
     meta: {
-      label: "Timing Phases",
+      label: "时序阶段",
       headerClassName:
         "w-[--header-timing-size] max-w-[--header-timing-size] min-w-[--header-timing-size]",
       cellClassName:
@@ -312,7 +312,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
     id: "timing.connection",
     accessorFn: (row) => row["timing.connection"],
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Connection" />
+      <DataTableColumnHeader column={column} title="连接" />
     ),
     cell: ({ row }) => {
       const value =
@@ -324,7 +324,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
     size: 110,
     minSize: 110,
     meta: {
-      label: "Connection",
+      label: "连接",
       headerClassName:
         "w-[--header-timing-connection-size] max-w-[--header-timing-connection-size] min-w-[--header-timing-connection-size]",
       cellClassName:
@@ -379,7 +379,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
     id: "timing.transfer",
     accessorFn: (row) => row["timing.transfer"],
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Transfer" />
+      <DataTableColumnHeader column={column} title="传输" />
     ),
     cell: ({ row }) => {
       const value =
@@ -391,7 +391,7 @@ export const columns: ColumnDef<ColumnSchema>[] = [
     size: 110,
     minSize: 110,
     meta: {
-      label: "Transfer",
+      label: "传输",
       headerClassName:
         "w-[--header-timing-transfer-size] max-w-[--header-timing-transfer-size] min-w-[--header-timing-transfer-size]",
       cellClassName:

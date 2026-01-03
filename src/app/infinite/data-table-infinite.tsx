@@ -321,7 +321,7 @@ export function DataTableInfinite<TData, TValue, TMeta>({
         >
           <div className="border-b border-border bg-background p-2 md:sticky md:top-0">
             <div className="flex h-[46px] items-center justify-between gap-3">
-              <p className="px-2 font-medium text-foreground">Filters</p>
+              <p className="px-2 font-medium text-foreground">过滤器</p>
               <div>
                 {table.getState().columnFilters.length ? (
                   <DataTableResetButton />

@@ -42,7 +42,7 @@ export function DataTableFilterInput<TData>({
         {value}
       </Label>
       <InputWithAddons
-        placeholder="Search"
+        placeholder="搜索"
         leading={<Search className="mt-0.5 h-4 w-4" />}
         containerClassName="h-9 rounded-lg"
         name={value}

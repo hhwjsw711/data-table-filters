@@ -49,7 +49,7 @@ export function DataTableFilterControlsDrawer() {
           </TooltipTrigger>
           <TooltipContent side="right">
             <p>
-              Toggle controls with{" "}
+              切换控制面板{" "}
               <Kbd className="ml-1 text-muted-foreground group-hover:text-accent-foreground">
                 <span className="mr-1">⌘</span>
                 <span>B</span>
@@ -61,8 +61,8 @@ export function DataTableFilterControlsDrawer() {
       <DrawerContent className="max-h-[calc(100dvh-4rem)]">
         <VisuallyHidden>
           <DrawerHeader>
-            <DrawerTitle>Filters</DrawerTitle>
-            <DrawerDescription>Adjust your table filters</DrawerDescription>
+            <DrawerTitle>过滤器</DrawerTitle>
+            <DrawerDescription>调整表格过滤条件</DrawerDescription>
           </DrawerHeader>
         </VisuallyHidden>
         <div className="px-4 flex-1 overflow-y-auto">
@@ -71,7 +71,7 @@ export function DataTableFilterControlsDrawer() {
         <DrawerFooter>
           <DrawerClose asChild>
             <Button variant="outline" className="w-full">
-              Close
+              关闭
             </Button>
           </DrawerClose>
         </DrawerFooter>

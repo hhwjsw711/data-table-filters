@@ -16,7 +16,7 @@ import { getLevelLabel } from "@/lib/request/level";
 import { useDataTable } from "@/components/data-table/data-table-provider";
 import { BaseChartSchema, TimelineChartSchema } from "./schema";
 
-export const description = "A stacked bar chart";
+export const description = "堆叠条形图";
 
 const chartConfig = {
   success: {

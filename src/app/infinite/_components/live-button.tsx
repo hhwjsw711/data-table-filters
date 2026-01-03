@@ -73,7 +73,7 @@ export function LiveButton({ fetchPreviousPage }: LiveButtonProps) {
       ) : (
         <CirclePlay className="mr-2 h-4 w-4" />
       )}
-      Live
+      实时
     </Button>
   );
 }
